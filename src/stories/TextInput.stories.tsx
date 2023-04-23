@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TextInput } from './TextInput';
 
 const meta: Meta<typeof TextInput> = {
-  title: 'HomeWeb/TextInput',
+  title: 'HomeWeb/Elements/TextInput',
   component: TextInput,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
   tags: ['autodocs'],
@@ -22,11 +22,33 @@ export const Text: Story = {
 };
 
 /**
- * Des
+ * Use a password field so that user input is masked
  */
 export const Password: Story = {
     args: {
         label: 'Password',
         password: true
     }
+};
+
+/**
+ * Invalidate the text input and provide a validation message.
+ */
+export const InvalidWithValidationMessage: Story = {
+  args: {
+      label: 'Password',
+      password: true,
+      invalid: true,
+      validationMessage: 'Please enter correct password'
+  }
+};
+
+/**
+ * Invalidate the text input and do not provide a validation message.
+ */
+export const InvalidWithoutValidationMessage: Story = {
+  args: {
+      label: 'Username',
+      invalid: true
+  }
 };

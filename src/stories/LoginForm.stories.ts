@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { LoginForm } from './LoginForm';
 
 const meta: Meta<typeof LoginForm> = {
-  title: 'HomeWeb/LoginForm',
+  title: 'HomeWeb/Forms/LoginForm',
   component: LoginForm,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
   tags: ['autodocs'],
