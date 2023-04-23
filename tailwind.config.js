@@ -4,9 +4,13 @@ module.exports = {
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
     './src/app/**/*.{js,ts,jsx,tsx}',
+    './src/stories/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['Roboto' ],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
