@@ -25,3 +25,10 @@ export const Secondary: Story = {
     label: 'Button',
   },
 };
+
+export const NoUpperCaseLabel: Story = {
+  args: {
+    label: 'Button',
+    noUpperCaseLabel: true
+  }
+}

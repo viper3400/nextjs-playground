@@ -11,6 +11,10 @@ interface ButtonProps {
    */
   label: string;
   /**
+   * Disable upper case label
+   */
+  noUpperCaseLabel: boolean;
+  /**
    * Optional click handler
    */
   onClick?: () => void;
@@ -22,16 +26,17 @@ interface ButtonProps {
 export const JaxxButton = ({
   primary = false,
   label,
+  noUpperCaseLabel,
   ...props
 }: ButtonProps) => {
   const mode = primary ? PrimaryColor : SecondaryColor;
   return (
     <button
       type="button"
-      className={`${mode} p-2`}
+      className={`${mode} p-2 px-8`}
       {...props}
     >
-      {label}
+      {noUpperCaseLabel ? label : label.toLocaleUpperCase()}
     </button>
   );
 };

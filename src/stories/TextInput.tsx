@@ -3,6 +3,10 @@ import { useEffect, useRef, useState } from "react";
 interface TextInputProps {
     label: string
     password?: boolean
+    /**
+     * Set the focus on this input when component gets loaded. Be aware that just one 
+     * element can get the focus, and probably it's the last one.
+     */
     setFocus?: boolean
     /**
      * Option to set the field input valid / invalid
