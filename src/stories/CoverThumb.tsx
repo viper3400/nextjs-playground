@@ -11,49 +11,49 @@ interface CoverThumbProps {
 }
 
 const TvSeries = () => (
-    <div className="mb-1">
-        <div className="border border-neutral-200">
-            <SeriesIcon invert />
-        </div>
+  <div className="mb-1">
+    <div className="border border-neutral-200">
+      <SeriesIcon invert />
     </div>
+  </div>
 )
 
 const Favorite = () => (
-    <div className="mb-1">
+  <div className="mb-1">
     <div className="border border-neutral-200">
-        <FavoriteIcon invert />
+      <FavoriteIcon invert />
     </div>
-</div>
+  </div>
 )
 
 const Flag = () => (
-    <div className="mb-1">
+  <div className="mb-1">
     <div className="border border-neutral-200">
-        <FlagIcon invert />
+      <FlagIcon invert />
     </div>
-</div>
+  </div>
 )
 
 export const CoverThumb = ({imageSource, altText, isTvSeries, isFavorite, isFlagged} : CoverThumbProps) => {
-    return (
-        <>
-            <div className="relative w-40 pl-4 pr-4 pt-4 pb-4">
-                <div className="w-32">
-                    <Image
+  return (
+    <>
+      <div className="relative w-40 pl-4 pr-4 pt-4 pb-4">
+        <div className="w-32">
+          <Image
                        
-                        src={imageSource}
-                        alt={altText}
+            src={imageSource}
+            alt={altText}
                 
-                        priority
-                        />
-                    </div>
-                <div className="flex flex-col gap absolute top-6 right-2">
-                    {isTvSeries && <TvSeries />}
-                    {isFavorite && <Favorite />}
-                    {isFlagged && <Flag />}
-                </div>
-            </div>
+            priority
+          />
+        </div>
+        <div className="flex flex-col gap absolute top-6 right-2">
+          {isTvSeries && <TvSeries />}
+          {isFavorite && <Favorite />}
+          {isFlagged && <Flag />}
+        </div>
+      </div>
             
-        </>
-    )
+    </>
+  )
 }

@@ -16,19 +16,19 @@ export default meta
 type Story = StoryObj<typeof TextInput>;
 
 export const Text: Story = {
-    args: {
-        label: 'Username'
-    }
+  args: {
+    label: 'Username'
+  }
 }
 
 /**
  * Use a password field so that user input is masked
  */
 export const Password: Story = {
-    args: {
-        label: 'Password',
-        password: true
-    }
+  args: {
+    label: 'Password',
+    password: true
+  }
 }
 
 /**
@@ -36,10 +36,10 @@ export const Password: Story = {
  */
 export const InvalidWithValidationMessage: Story = {
   args: {
-      label: 'Password',
-      password: true,
-      invalid: true,
-      validationMessage: 'Please enter correct password'
+    label: 'Password',
+    password: true,
+    invalid: true,
+    validationMessage: 'Please enter correct password'
   }
 }
 
@@ -48,7 +48,7 @@ export const InvalidWithValidationMessage: Story = {
  */
 export const InvalidWithoutValidationMessage: Story = {
   args: {
-      label: 'Username',
-      invalid: true
+    label: 'Username',
+    invalid: true
   }
 }
