@@ -1,6 +1,6 @@
 
 import Image, { StaticImageData } from 'next/image'
-import { SeriesIcon } from './SeriesIcon';
+import { SeriesIcon } from './icons/SeriesIcon';
 
 interface CoverThumbProps {
   imageSource: string | StaticImageData;
