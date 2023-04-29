@@ -1,8 +1,4 @@
-
-
-interface IconProperties {
-    invert: boolean
-}
+import { IconProperties } from "./IconProperties"
 
 export const SeriesIcon = ({ invert }: IconProperties) => {
     const fillColor = invert ? '#FFFFFF' : '#000000'
