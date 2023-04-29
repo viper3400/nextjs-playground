@@ -10,6 +10,30 @@ interface CoverThumbProps {
   isFlagged: boolean
 }
 
+const TvSeries = () => (
+    <div className="mb-1">
+        <div className="border border-neutral-200">
+            <SeriesIcon invert />
+        </div>
+    </div>
+)
+
+const Favorite = () => (
+    <div className="mb-1">
+    <div className="border border-neutral-200">
+        <FavoriteIcon invert />
+    </div>
+</div>
+)
+
+const Flag = () => (
+    <div className="mb-1">
+    <div className="border border-neutral-200">
+        <FlagIcon invert />
+    </div>
+</div>
+)
+
 export const CoverThumb = ({imageSource, altText, isTvSeries, isFavorite, isFlagged} : CoverThumbProps) => {
     return (
         <>
@@ -23,10 +47,10 @@ export const CoverThumb = ({imageSource, altText, isTvSeries, isFavorite, isFlag
                         priority
                         />
                     </div>
-                <div className="flex flex-col gap absolute top-6 right-2 border">
-                    {isTvSeries ? <SeriesIcon invert /> : ''}
-                    {isFavorite ? <FavoriteIcon invert /> : ''}
-                    {isFlagged ? <FlagIcon invert /> : ''}
+                <div className="flex flex-col gap absolute top-6 right-2">
+                    {isTvSeries && <TvSeries />}
+                    {isFavorite && <Favorite />}
+                    {isFlagged && <Flag />}
                 </div>
             </div>
             
