@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react"
 
 interface TextInputProps {
     label: string
@@ -31,15 +31,15 @@ export const TextInput = ({
     invalid = false,
     validationMessage = ''
 }: TextInputProps) => {
-    const [inputFocused, setInputFocused ] = useState(false);
+    const [inputFocused, setInputFocused ] = useState(false)
 
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         if (inputRef.current && setFocus) {
-          inputRef.current.focus();
+          inputRef.current.focus()
         }
-      }, [setFocus]);
+      }, [setFocus])
 
     return (
         <>

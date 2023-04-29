@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { TextInput } from './TextInput';
+import type { Meta, StoryObj } from '@storybook/react'
+import { TextInput } from './TextInput'
 
 const meta: Meta<typeof TextInput> = {
   title: 'HomeWeb/Elements/TextInput',
@@ -10,16 +10,16 @@ const meta: Meta<typeof TextInput> = {
     // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen',
   },
-};
+}
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof TextInput>;
 
 export const Text: Story = {
     args: {
         label: 'Username'
     }
-};
+}
 
 /**
  * Use a password field so that user input is masked
@@ -29,7 +29,7 @@ export const Password: Story = {
         label: 'Password',
         password: true
     }
-};
+}
 
 /**
  * Invalidate the text input and provide a validation message.
@@ -41,7 +41,7 @@ export const InvalidWithValidationMessage: Story = {
       invalid: true,
       validationMessage: 'Please enter correct password'
   }
-};
+}
 
 /**
  * Invalidate the text input and do not provide a validation message.
@@ -51,4 +51,4 @@ export const InvalidWithoutValidationMessage: Story = {
       label: 'Username',
       invalid: true
   }
-};
+}

@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { FlagIcon } from './';
+import type { Meta, StoryObj } from '@storybook/react'
+import { FlagIcon } from './'
 
 /**
  * An icon as symbol for a flagged movie.
@@ -13,16 +13,16 @@ const meta: Meta<typeof FlagIcon> = {
     // More on how to position stories at: https://storybook.js.org/docs/react/configure/story-layout
     layout: 'fullscreen',
   },
-};
+}
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof FlagIcon>;
 
 export const Invert: Story = {
   args: {
     invert: true
   }
-};
+}
 
 export const Dark: Story = {
   args: {

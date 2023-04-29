@@ -1,15 +1,15 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react'
 
-import { JaxxButton } from './JaxxButton';
+import { JaxxButton } from './JaxxButton'
 
 // More on how to set up stories at: https://storybook.js.org/docs/react/writing-stories/introduction
 const meta: Meta<typeof JaxxButton> = {
   title: 'HomeWeb/Elements/JaxxButton',
   component: JaxxButton,
   tags: ['autodocs'],
-};
+}
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof JaxxButton>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
@@ -18,13 +18,13 @@ export const Primary: Story = {
     primary: true,
     label: 'Button',
   },
-};
+}
 
 export const Secondary: Story = {
   args: {
     label: 'Button',
   },
-};
+}
 
 export const NoUpperCaseLabel: Story = {
   args: {

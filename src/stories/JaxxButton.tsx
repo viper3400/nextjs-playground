@@ -1,5 +1,5 @@
-import React from 'react';
-import { PrimaryColor, SecondaryColor } from './DefaultClasses';
+import React from 'react'
+import { PrimaryColor, SecondaryColor } from './DefaultClasses'
 
 interface ButtonProps {
   /**
@@ -29,7 +29,7 @@ export const JaxxButton = ({
   noUpperCaseLabel,
   ...props
 }: ButtonProps) => {
-  const mode = primary ? PrimaryColor : SecondaryColor;
+  const mode = primary ? PrimaryColor : SecondaryColor
   return (
     <button
       type="button"
@@ -38,5 +38,5 @@ export const JaxxButton = ({
     >
       {noUpperCaseLabel ? label : label.toLocaleUpperCase()}
     </button>
-  );
-};
+  )
+}
