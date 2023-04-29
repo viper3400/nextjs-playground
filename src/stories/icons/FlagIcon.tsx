@@ -1,4 +1,4 @@
-import { IconProperties } from "./IconProperties"
+import { IconProperties } from './IconProperties'
 
 export const FlagIcon = ({ invert }: IconProperties) => {
     const fillColor = invert ? '#FFFFFF' : '#000000'

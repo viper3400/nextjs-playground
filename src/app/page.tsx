@@ -1,4 +1,4 @@
-import { Dog } from "@/components/dog"
+import { Dog } from '@/components/dog'
 
 export default function Home() {
   return (

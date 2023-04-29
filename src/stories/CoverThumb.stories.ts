@@ -1,5 +1,5 @@
-import { Meta, StoryObj } from "@storybook/react"
-import { CoverThumb } from "./CoverThumb"
+import { Meta, StoryObj } from '@storybook/react'
+import { CoverThumb } from './CoverThumb'
 import picard from './assets/picard.jpg'
 
 const meta: Meta<typeof CoverThumb> = {

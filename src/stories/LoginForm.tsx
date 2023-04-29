@@ -1,5 +1,5 @@
-import { TextInput } from "./TextInput"
-import { JaxxButton } from "./JaxxButton"
+import { TextInput } from './TextInput'
+import { JaxxButton } from './JaxxButton'
 
 interface LoginFormProps {
   /**

@@ -1,5 +1,5 @@
-import { IconProperties } from "./IconProperties"
-import svg from "./svg/favorite.svg"
+import { IconProperties } from './IconProperties'
+import svg from './svg/favorite.svg'
 
 export const FavoriteIcon = ({ invert }: IconProperties) => {
     const fillColor = invert ? '#FFFFFF' : '#000000'

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from 'react'
 
 interface TextInputProps {
     label: string
@@ -51,9 +51,9 @@ export const TextInput = ({
                   } ${
                     invalid ? 'text-rose-600' : ''
                   }`}
-                data-test={dataTestAttribute + "_label"}
+                data-test={dataTestAttribute + '_label'}
                 >
-                {invalid && validationMessage != '' ? label + " (" + validationMessage + ")" : label}
+                {invalid && validationMessage != '' ? label + ' (' + validationMessage + ')' : label}
               </div>
             </div>
             <div>
@@ -61,7 +61,7 @@ export const TextInput = ({
                 type={password ? 'password' : 'text'} 
                 className={`w-full p-1 border-b-2 outline-none transition duration-700 ${
                   invalid ? 'border-rose-600' : 'border-slate-200 focus:border-blue-500'}`}
-                data-test={dataTestAttribute + "_input"}
+                data-test={dataTestAttribute + '_input'}
                 ref={inputRef}
                 onFocus={() => setInputFocused(true)}
                 onBlur={() => setInputFocused(false)}

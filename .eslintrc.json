@@ -4,6 +4,7 @@
     "plugin:storybook/recommended"
   ],
   "rules": {
-    "semi": ["error", "never"]
+    "semi": ["error", "never"],
+    "quotes": ["error", "single"]
   }
 }
