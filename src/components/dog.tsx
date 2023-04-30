@@ -1,10 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import { getDog } from '@/lib/dogs'
 import { getTemperature } from '@/lib/weather'
 import { JaxxButton } from './jaxx-button'
 import { DogImage } from './dog-image'
-import { useState } from 'react'
 
 
 export const Dog = () => {
