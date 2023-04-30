@@ -4,7 +4,7 @@ interface TextInputProps {
     label: string
     password?: boolean
     /**
-     * Set the focus on this input when component gets loaded. Be aware that just one 
+     * Set the focus on this input when component gets loaded. Be aware that just one
      * element can get the focus, and probably it's the last one.
      */
     setFocus?: boolean
@@ -15,7 +15,7 @@ interface TextInputProps {
     validationMessage?: string
     /**
      * Optional parameter for data-test attribute.
-     * Will be the label, if empty. 
+     * Will be the label, if empty.
      */
     dataTestAttribute?: string;
 }
@@ -45,7 +45,7 @@ export const TextInput = ({
     <>
       <div className="flex flex-col space-y-2 p-2">
         <div>
-          <div 
+          <div
             className={ `transition duration-700 text-sm ${
               inputFocused ? 'text-black' : 'text-slate-400'
             } ${
@@ -57,8 +57,8 @@ export const TextInput = ({
           </div>
         </div>
         <div>
-          <input 
-            type={ password ? 'password' : 'text' } 
+          <input
+            type={ password ? 'password' : 'text' }
             className={ `w-full p-1 border-b-2 outline-none transition duration-700 ${
               invalid ? 'border-rose-600' : 'border-slate-200 focus:border-blue-500'}` }
             data-test={ dataTestAttribute + '_input' }

@@ -50,7 +50,7 @@ const LastSeen = () => (
     <div className="border border-neutral-200">
       <LabeledIcon label={ fraction } />
     </div>
-  </div>  
+  </div>
 )
 
 export const CoverThumb = ({ imageSource, altText, isTvSeries, isFavorite, isFlagged, isSeen } : CoverThumbProps) => {
@@ -59,10 +59,10 @@ export const CoverThumb = ({ imageSource, altText, isTvSeries, isFavorite, isFla
       <div className="relative w-40 pl-4 pr-4 pt-4 pb-4">
         <div className="w-32">
           <Image
-                       
+
             src={ imageSource }
             alt={ altText }
-                
+
             priority
           />
         </div>
@@ -74,7 +74,7 @@ export const CoverThumb = ({ imageSource, altText, isTvSeries, isFavorite, isFla
           {isFlagged && <Flag />}
         </div>
       </div>
-            
+
     </>
   )
 }

@@ -14,10 +14,10 @@ const meta: Meta<typeof CoverThumb> = {
     layout: 'fullscreen',
   },
 }
-  
+
 export default meta
   type Story = StoryObj<typeof CoverThumb>;
-  
+
 export const Default : Story = {
   args: {
     imageSource: picard,
