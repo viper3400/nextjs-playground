@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { FlagIcon } from './'
+import { FlagIcon } from '.'
 
 /**
  * An icon as symbol for a flagged movie.
