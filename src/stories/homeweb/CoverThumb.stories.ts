@@ -50,6 +50,7 @@ export const FullFlavoured : Story = {
     altText: 'Start Trek Picard',
     isTvSeries: true,
     isFavorite: true,
-    isFlagged: true
+    isFlagged: true,
+    isSeen: true
   }
 }
