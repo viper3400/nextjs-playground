@@ -9,7 +9,8 @@ interface CoverThumbProps {
   isFavorite: boolean
   isFlagged: boolean
   isSeen: boolean
-  hasDigitalCopy: boolean
+  hasDigitalCopy: boolean,
+  bottomLabel: string
 }
 
 const TvSeries = () => (
@@ -69,7 +70,8 @@ export const CoverThumb = ({
   isFavorite,
   isFlagged,
   isSeen,
-  hasDigitalCopy
+  hasDigitalCopy,
+  bottomLabel
 } : CoverThumbProps) => {
 
   return (
@@ -83,6 +85,9 @@ export const CoverThumb = ({
 
             priority
           />
+        </div>
+        <div className="text-center bg-indigo-500 text-white font-bold p-2">
+          { bottomLabel }
         </div>
         <div className="flex flex-col gap absolute top-6 right-2">
           {isTvSeries && <TvSeries />}

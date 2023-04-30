@@ -21,7 +21,8 @@ export default meta
 export const Default : Story = {
   args: {
     imageSource: picard,
-    altText: 'Star Trek Picard'
+    altText: 'Star Trek Picard',
+    bottomLabel: 'R01F2D01'
   }
 }
 
@@ -29,7 +30,8 @@ export const Favorite : Story = {
   args: {
     imageSource: mario,
     altText: 'Super Mario Bros',
-    isFavorite: true
+    isFavorite: true,
+    bottomLabel: 'R12F2D01'
   }
 }
 
@@ -37,7 +39,8 @@ export const Flagged : Story = {
   args: {
     imageSource: avatar,
     altText: 'Avatar: The Way of Water',
-    isFlagged: true
+    isFlagged: true,
+    bottomLabel: 'R01F7D04'
   }
 }
 
@@ -52,6 +55,7 @@ export const FullFlavoured : Story = {
     isFavorite: true,
     isFlagged: true,
     isSeen: true,
-    hasDigitalCopy: true
+    hasDigitalCopy: true,
+    bottomLabel: 'HDD'
   }
 }
