@@ -33,8 +33,8 @@ export const JaxxButton = ({
   return (
     <button
       type="button"
-      className={`${mode} p-2 px-8`}
-      {...props}
+      className={ `${mode} p-2 px-8` }
+      { ...props }
     >
       {noUpperCaseLabel ? label : label.toLocaleUpperCase()}
     </button>

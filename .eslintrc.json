@@ -3,10 +3,13 @@
     "next/core-web-vitals",
     "plugin:storybook/recommended"
   ],
+  "plugins": ["react"],
   "rules": {
     "semi": ["error", "never"],
     "quotes": ["error", "single"],
     "indent": ["error", 2],
-    "no-tabs": ["error"]
+    "no-tabs": ["error"],
+    "object-curly-spacing": ["error", "always"],
+    "react/jsx-curly-spacing": ["error", "always"]
   }
 }

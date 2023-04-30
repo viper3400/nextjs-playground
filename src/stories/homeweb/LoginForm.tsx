@@ -36,10 +36,10 @@ export const LoginForm = ({
     <>
       <div className="rounded-lg md:w-3/5 md:border md:m-4 p-4">
         <div className="text-2xl text-slate-700 pb-8 pl-2">{dialogTitle}</div>
-        <TextInput setFocus label={usernameLabel} data-test="username-input" />
-        <TextInput label={passwordLabel} password data-test="password-input" />
+        <TextInput setFocus label={ usernameLabel } data-test="username-input" />
+        <TextInput label={ passwordLabel } password data-test="password-input" />
         <div className="flex flex-row-reverse pt-8 pr-2 gap-2">
-          <JaxxButton label={logInButtonLabel} primary {...props} data-test="sign-in-button" />
+          <JaxxButton label={ logInButtonLabel } primary { ...props } data-test="sign-in-button" />
         </div>
       </div>
     </>

@@ -48,20 +48,20 @@ const fraction = '10' + String.fromCharCode(0x00BD) + 'Y'
 const LastSeen = () => (
   <div className="mb-1">
     <div className="border border-neutral-200">
-      <LabeledIcon label={fraction} />
+      <LabeledIcon label={ fraction } />
     </div>
   </div>  
 )
 
-export const CoverThumb = ({imageSource, altText, isTvSeries, isFavorite, isFlagged, isSeen} : CoverThumbProps) => {
+export const CoverThumb = ({ imageSource, altText, isTvSeries, isFavorite, isFlagged, isSeen } : CoverThumbProps) => {
   return (
     <>
       <div className="relative w-40 pl-4 pr-4 pt-4 pb-4">
         <div className="w-32">
           <Image
                        
-            src={imageSource}
-            alt={altText}
+            src={ imageSource }
+            alt={ altText }
                 
             priority
           />

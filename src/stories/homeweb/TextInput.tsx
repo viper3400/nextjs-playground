@@ -46,25 +46,25 @@ export const TextInput = ({
       <div className="flex flex-col space-y-2 p-2">
         <div>
           <div 
-            className={`transition duration-700 text-sm ${
+            className={ `transition duration-700 text-sm ${
               inputFocused ? 'text-black' : 'text-slate-400'
             } ${
               invalid ? 'text-rose-600' : ''
-            }`}
-            data-test={dataTestAttribute + '_label'}
+            }` }
+            data-test={ dataTestAttribute + '_label' }
           >
             {invalid && validationMessage != '' ? label + ' (' + validationMessage + ')' : label}
           </div>
         </div>
         <div>
           <input 
-            type={password ? 'password' : 'text'} 
-            className={`w-full p-1 border-b-2 outline-none transition duration-700 ${
-              invalid ? 'border-rose-600' : 'border-slate-200 focus:border-blue-500'}`}
-            data-test={dataTestAttribute + '_input'}
-            ref={inputRef}
-            onFocus={() => setInputFocused(true)}
-            onBlur={() => setInputFocused(false)}
+            type={ password ? 'password' : 'text' } 
+            className={ `w-full p-1 border-b-2 outline-none transition duration-700 ${
+              invalid ? 'border-rose-600' : 'border-slate-200 focus:border-blue-500'}` }
+            data-test={ dataTestAttribute + '_input' }
+            ref={ inputRef }
+            onFocus={ () => setInputFocused(true) }
+            onBlur={ () => setInputFocused(false) }
           />
         </div>
       </div>
