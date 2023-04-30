@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { FavoriteIcon } from './FavoriteIcon'
+import { FavoriteIcon } from '.'
 
 /**
  * An icon as symbol for a favorite movie.

@@ -1,12 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { LabeledIcon } from '.'
+import { VideoLibraryIcon } from '.'
+
 
 /**
- * An icon as symbol that a disk or entry is a tv series.
+ * An icon as symbol that a disk or entry is available as digital copy.
  */
-const meta: Meta<typeof LabeledIcon> = {
-  title: 'HomeWeb/Icons/LabeledIcon',
-  component: LabeledIcon,
+const meta: Meta<typeof VideoLibraryIcon> = {
+  title: 'HomeWeb/Icons/VideoLibraryIcon',
+  component: VideoLibraryIcon,
   // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
   tags: ['autodocs'],
   parameters: {
@@ -16,10 +17,16 @@ const meta: Meta<typeof LabeledIcon> = {
 }
 
 export default meta
-type Story = StoryObj<typeof LabeledIcon>;
+type Story = StoryObj<typeof VideoLibraryIcon>;
 
 export const Invert: Story = {
   args: {
-    label: '2x'
+    invert: true
+  }
+}
+
+export const Dark: Story = {
+  args: {
+    invert: false
   }
 }

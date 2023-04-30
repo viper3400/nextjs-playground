@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { SeriesIcon } from './SeriesIcon'
+import { SeriesIcon } from '.'
 
 /**
  * An icon as symbol that a disk or entry is a tv series.

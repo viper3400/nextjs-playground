@@ -1,6 +1,6 @@
 
 import Image, { StaticImageData } from 'next/image'
-import { SeriesIcon, FavoriteIcon, FlagIcon, LabeledIcon } from './icons'
+import { SeriesIcon, FavoriteIcon, FlagIcon, LabeledIcon, VideoLibraryIcon } from './icons'
 
 interface CoverThumbProps {
   imageSource: string | StaticImageData;
@@ -9,6 +9,7 @@ interface CoverThumbProps {
   isFavorite: boolean
   isFlagged: boolean
   isSeen: boolean
+  hasDigitalCopy: boolean
 }
 
 const TvSeries = () => (
@@ -53,7 +54,24 @@ const LastSeen = () => (
   </div>
 )
 
-export const CoverThumb = ({ imageSource, altText, isTvSeries, isFavorite, isFlagged, isSeen } : CoverThumbProps) => {
+const DigitalCopy = () => (
+  <div className="mb-1">
+    <div className="border border-neutral-200">
+      <VideoLibraryIcon invert />
+    </div>
+  </div>
+)
+
+export const CoverThumb = ({
+  imageSource,
+  altText,
+  isTvSeries,
+  isFavorite,
+  isFlagged,
+  isSeen,
+  hasDigitalCopy
+} : CoverThumbProps) => {
+
   return (
     <>
       <div className="relative w-40 pl-4 pr-4 pt-4 pb-4">
@@ -68,6 +86,7 @@ export const CoverThumb = ({ imageSource, altText, isTvSeries, isFavorite, isFla
         </div>
         <div className="flex flex-col gap absolute top-6 right-2">
           {isTvSeries && <TvSeries />}
+          {hasDigitalCopy && <DigitalCopy />}
           {isSeen && <TimesSeen />}
           {isSeen && <LastSeen />}
           {isFavorite && <Favorite />}

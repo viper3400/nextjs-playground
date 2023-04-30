@@ -51,6 +51,7 @@ export const FullFlavoured : Story = {
     isTvSeries: true,
     isFavorite: true,
     isFlagged: true,
-    isSeen: true
+    isSeen: true,
+    hasDigitalCopy: true
   }
 }
