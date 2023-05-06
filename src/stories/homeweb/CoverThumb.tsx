@@ -38,7 +38,7 @@ const Flag = () => (
   </div>
 )
 
-const TimesSeen = ({ timesSeen }) => (
+const TimesSeen = ({ timesSeen } : { timesSeen : string}) => (
   <div className="mb-1">
     <div className="border border-neutral-200">
       <LabeledIcon label={ timesSeen + 'x' } />
