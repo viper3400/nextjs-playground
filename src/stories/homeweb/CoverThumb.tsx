@@ -2,7 +2,7 @@
 import Image, { StaticImageData } from 'next/image'
 import { SeriesIcon, FavoriteIcon, FlagIcon, LabeledIcon, VideoLibraryIcon } from './icons'
 
-interface CoverThumbProps {
+export interface CoverThumbProps {
   imageSource: string | StaticImageData;
   altText: string;
   isTvSeries: boolean
