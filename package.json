@@ -14,8 +14,8 @@
   "dependencies": {
     "@material-tailwind/react": "^1.4.2",
     "@types/node": "18.16.5",
-    "@types/react": "18.2.0",
-    "@types/react-dom": "18.2.1",
+    "@types/react": "18.2.6",
+    "@types/react-dom": "18.2.4",
     "autoprefixer": "10.4.14",
     "clsx": "^1.2.1",
     "eslint": "8.39.0",
