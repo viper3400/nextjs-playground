@@ -9,6 +9,7 @@ interface CoverThumbProps {
   isFavorite: boolean
   isFlagged: boolean
   isSeen: boolean
+  timesSeen: string
   hasDigitalCopy: boolean,
   bottomLabel: string
 }
@@ -37,10 +38,10 @@ const Flag = () => (
   </div>
 )
 
-const TimesSeen = () => (
+const TimesSeen = ({ timesSeen }) => (
   <div className="mb-1">
     <div className="border border-neutral-200">
-      <LabeledIcon label="3x" />
+      <LabeledIcon label={ timesSeen + 'x' } />
     </div>
   </div>
 )
@@ -70,6 +71,7 @@ export const CoverThumb = ({
   isFavorite,
   isFlagged,
   isSeen,
+  timesSeen,
   hasDigitalCopy,
   bottomLabel
 } : CoverThumbProps) => {
@@ -92,7 +94,7 @@ export const CoverThumb = ({
         <div className="flex flex-col gap absolute top-6 right-2">
           {isTvSeries && <TvSeries />}
           {hasDigitalCopy && <DigitalCopy />}
-          {isSeen && <TimesSeen />}
+          {isSeen && <TimesSeen timesSeen={ timesSeen } />}
           {isSeen && <LastSeen />}
           {isFavorite && <Favorite />}
           {isFlagged && <Flag />}

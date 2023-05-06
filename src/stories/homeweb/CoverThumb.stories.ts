@@ -55,6 +55,7 @@ export const FullFlavoured : Story = {
     isFavorite: true,
     isFlagged: true,
     isSeen: true,
+    timesSeen: '4',
     hasDigitalCopy: true,
     bottomLabel: 'HDD'
   }
