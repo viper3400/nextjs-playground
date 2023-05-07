@@ -5,7 +5,9 @@ export const Header = () => {
     <>
       <div className="flex flex-row place-items-center bg-indigo-500 p-4">
         <div>
-          <MenuIcon invert />
+          <button>
+            <MenuIcon invert />
+          </button>
         </div>
         <div className="pl-6 font-bold text-2xl text-white">
           Filmdatenbank
