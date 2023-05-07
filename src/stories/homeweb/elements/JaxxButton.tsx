@@ -1,5 +1,5 @@
 import React from 'react'
-import { PrimaryColor, SecondaryColor } from './DefaultClasses'
+import { PrimaryColor, SecondaryColor } from '../DefaultClasses'
 
 interface ButtonProps {
   /**
