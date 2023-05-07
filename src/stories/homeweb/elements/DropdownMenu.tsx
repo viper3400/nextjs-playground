@@ -31,7 +31,6 @@ const MappedEntries = ({ entries, onSelectEntry }: DropdownMenuProperties) =>  {
 
 export const DropdownMenu = ({ label, entries,openRight, onSelectEntry }: DropdownMenuProperties) => {
   const [ isFocused, setIsFocused ] = React.useState(false)
-  const [selectedItem, setSelectedItem] = React.useState<number | string>()
 
   const wrapperRef = useRef<any>(null)
   useEffect(() => {
