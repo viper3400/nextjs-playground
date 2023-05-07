@@ -12,7 +12,7 @@ interface HeaderProperties {
 export const Header = ({ mainLabel, leftMenuEntries, rightMenuEntries, rightMenuLabel, onSelectMenuEntry } : HeaderProperties ) => {
   return (
     <>
-      <div className="flex place-items-center bg-indigo-500 p-4">
+      <div className="flex place-items-center bg-indigo-500 p-2">
         <div className='flex-none mr-4'>
           <button>
             <DropdownMenu

@@ -50,13 +50,15 @@ export const DropdownMenu = ({ label, entries,openRight, onSelectEntry }: Dropdo
     <>
       <div className='relative' ref={ wrapperRef }>
         <button onClick={ () => setIsFocused(!isFocused) }>
-          {
-            !label && <MenuIcon invert/>
-          }
-          {
-            label &&
-            <div className='text-white'>{ label } </div>
-          }
+          <div className={ `${isFocused ? 'bg-indigo-300' : ''}` }>
+            {
+              !label && <MenuIcon invert/>
+            }
+            {
+              label &&
+            <div className='text-white p-2'>{ label } </div>
+            }
+          </div>
         </button>
         { isFocused && (
           <div className={ `absolute ${openRight ? 'right-0' : 'left-0'} top-full rounded-md shadow-lg` }>
