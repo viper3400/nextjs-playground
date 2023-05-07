@@ -27,6 +27,7 @@ export const Header = ({ mainLabel, leftMenuEntries, rightMenuEntries, rightMenu
           <button>
             <DropdownMenu
               label={ rightMenuLabel }
+              openRight
               entries={ rightMenuEntries }
               onSelectEntry={ onSelectMenuEntry } />
           </button>

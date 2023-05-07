@@ -8,6 +8,7 @@ interface DropdownMenuProperties {
      */
     label?: string
     entries: MenuEntryProperties[]
+    openRight?: boolean
     onSelectEntry: (entry: MenuEntryProperties) => void
 }
 
@@ -28,7 +29,7 @@ const MappedEntries = ({ entries, onSelectEntry }: DropdownMenuProperties) =>  {
   )
 }
 
-export const DropdownMenu = ({ label, entries, onSelectEntry }: DropdownMenuProperties) => {
+export const DropdownMenu = ({ label, entries,openRight, onSelectEntry }: DropdownMenuProperties) => {
   const [ isFocused, setIsFocused ] = React.useState(false)
   const [selectedItem, setSelectedItem] = React.useState<number | string>()
 
@@ -59,7 +60,7 @@ export const DropdownMenu = ({ label, entries, onSelectEntry }: DropdownMenuProp
           }
         </button>
         { isFocused && (
-          <div className='absolute z-10'>
+          <div className={ `absolute z-10 ${openRight ? 'right-10' : 'left-10'}` }>
             {
               <MappedEntries
                 entries={ entries }
