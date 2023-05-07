@@ -17,7 +17,7 @@ const MappedEntries = ({ entries, onSelectEntry }: DropdownMenuProperties) =>  {
     <>
       {
         entries.map((item, index) => (
-          <div key={ index } className='flex bg-slate-100 hover:bg-slate-400' >
+          <div key={ index } className='flex bg-slate-100 hover:bg-slate-200 w-48' >
             <MenuEntry label={ item.label }
               onClick={
                 () => {
@@ -49,7 +49,7 @@ export const DropdownMenu = ({ label, entries,openRight, onSelectEntry }: Dropdo
 
   return (
     <>
-      <div ref={ wrapperRef }>
+      <div className='relative' ref={ wrapperRef }>
         <button onClick={ () => setIsFocused(!isFocused) }>
           {
             !label && <MenuIcon invert/>
@@ -60,15 +60,15 @@ export const DropdownMenu = ({ label, entries,openRight, onSelectEntry }: Dropdo
           }
         </button>
         { isFocused && (
-          <div className={ `absolute z-10 ${openRight ? 'right-10' : 'left-10'}` }>
-            {
-              <MappedEntries
-                entries={ entries }
-                onSelectEntry={ (item) => {
-                  setIsFocused(false)
-                  onSelectEntry(item)
-                } } />
-            }
+          <div className={ `absolute ${openRight ? 'right-0' : 'left-0'} top-full rounded-md shadow-lg` }>
+
+            <MappedEntries
+              entries={ entries }
+              onSelectEntry={ (item) => {
+                setIsFocused(false)
+                onSelectEntry(item)
+              } } />
+
           </div>
         )}
       </div>
