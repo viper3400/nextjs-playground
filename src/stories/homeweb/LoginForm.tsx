@@ -39,7 +39,7 @@ export const LoginForm = ({
         <TextInput setFocus label={ usernameLabel } data-test="username-input" />
         <TextInput label={ passwordLabel } password data-test="password-input" />
         <div className="flex flex-row-reverse pt-8 pr-2 gap-2">
-          <JaxxButton label={ logInButtonLabel } primary { ...props } data-test="sign-in-button" />
+          <JaxxButton noUpperCaseLabel= { false } label={ logInButtonLabel } primary { ...props } data-test="sign-in-button" />
         </div>
       </div>
     </>
