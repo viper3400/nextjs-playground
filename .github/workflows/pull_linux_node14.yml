@@ -1,5 +1,8 @@
 name: Build on each PR
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
