@@ -18,6 +18,10 @@ interface ButtonProps {
    * Optional click handler
    */
   onClick?: () => void;
+  /**
+   * Button type
+   */
+  type: 'button' | 'submit' | 'reset' | undefined;
 }
 
 /**
@@ -25,14 +29,16 @@ interface ButtonProps {
  */
 export const JaxxButton = ({
   primary = false,
+  type = 'button',
   label,
   noUpperCaseLabel,
+  onClick,
   ...props
 }: ButtonProps) => {
   const mode = primary ? PrimaryColor : SecondaryColor
   return (
     <button
-      type="button"
+      type={ type }
       className={ `${mode} p-2 px-8` }
       { ...props }
     >

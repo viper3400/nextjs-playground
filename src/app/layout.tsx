@@ -1,4 +1,7 @@
+
+import AuthenticationProvider from '@/auth-provider'
 import './globals.css'
+
 
 export const metadata = {
   title: 'My first NEXT JS app',
@@ -12,7 +15,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <AuthenticationProvider>{children}</AuthenticationProvider>
+      </body>
     </html>
   )
 }

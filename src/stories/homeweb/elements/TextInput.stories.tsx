@@ -17,6 +17,7 @@ type Story = StoryObj<typeof TextInput>;
 
 export const Text: Story = {
   args: {
+    inputName: 'Username',
     label: 'Username'
   }
 }
@@ -26,6 +27,7 @@ export const Text: Story = {
  */
 export const Password: Story = {
   args: {
+    inputName: 'Password',
     label: 'Password',
     password: true
   }
@@ -36,6 +38,7 @@ export const Password: Story = {
  */
 export const InvalidWithValidationMessage: Story = {
   args: {
+    inputName: 'Password',
     label: 'Password',
     password: true,
     invalid: true,
@@ -48,6 +51,7 @@ export const InvalidWithValidationMessage: Story = {
  */
 export const InvalidWithoutValidationMessage: Story = {
   args: {
+    inputName: 'Password',
     label: 'Username',
     invalid: true
   }

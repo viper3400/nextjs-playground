@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'filestore.community.support.microsoft.com',
+        hostname: 'autohub.ir',
         port: '',
         pathname: '**'
       }
@@ -19,6 +19,10 @@ const nextConfig = {
   experimental: {
     appDir: true,
     serverActions: true
+  },
+  publicRuntimeConfig: {
+    // Will be available on both server and client
+    apiUrl: process.env.NEXT_PUBLIC_VIDEODB_WEB_API_URL,
   },
 }
 

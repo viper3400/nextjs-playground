@@ -1,16 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { getDog } from '@/lib/dogs'
 import { getTemperature } from '@/lib/weather'
+import { getToken } from '@/lib/getToken'
+import { LoginForm } from '@/stories/homeweb/LoginForm'
+import { AuthenticationContext } from '@/auth-provider'
 import { JaxxButton } from './jaxx-button'
 import { DogImage } from './dog-image'
 
 
 export const Dog = () => {
-  const [ dogImage, setDogImage] = useState('https://filestore.community.support.microsoft.com/api/images/ext?url=https:%2f%2fanswersstaticfilecdnv2.azureedge.net%2fstatic%2fimages%2fimage-not-found.jpg')
-  const [ temperature, setTemperature] = useState()
+  const [ dogImage, setDogImage] = useState('https://autohub.ir/static/newapi/web/img/not_found.png')
+  const [ temperature, setTemperature] = useState('not set')
   const [ buttonDisabled, setButtonDisabled] = useState(false)
+  const { state, setState } = useContext(AuthenticationContext)
 
   const handleClick = async () => {
     setButtonDisabled(true)
