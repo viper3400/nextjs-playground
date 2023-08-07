@@ -1,8 +1,9 @@
 'use client'
 
 import   { createContext, ReactNode, useState } from 'react'
+import { AuthState } from '@/lib/types/AuthState'
 
-type AuthState = 'AUTHENTICATED' | 'NOT_AUTHENTICATED' | 'AUTHENTICATING';
+
 
 type AuthenticationProps = {
   state: AuthState;

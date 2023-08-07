@@ -1,0 +1,1 @@
+export type AuthState = 'AUTHENTICATED' | 'NOT_AUTHENTICATED' | 'AUTHENTICATING';

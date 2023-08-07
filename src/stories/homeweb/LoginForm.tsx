@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getToken } from '@/lib/getToken'
+import { LoginCredentials } from '@/lib/types'
 import { TextInput } from './elements/TextInput'
 import { JaxxButton } from './elements/JaxxButton'
 
@@ -21,9 +22,9 @@ interface LoginFormProps {
    */
   logInButtonLabel: string,
   /**
-  * Optional click handler
+  * onSubmit handler
   */
-  onClick?: () => void;
+  onSubmit: (formData: LoginCredentials) => void;
 }
 
 export const LoginForm = ({
@@ -31,12 +32,14 @@ export const LoginForm = ({
   usernameLabel = 'Username',
   passwordLabel = 'Password',
   logInButtonLabel = 'Log In',
+  onSubmit,
   ...props
 }: LoginFormProps) => {
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<LoginCredentials>({
     username: '',
     password: '',
+    group: 'VG_Default'
   })
 
   const [ token, setToken ] = useState('not set')
@@ -51,9 +54,11 @@ export const LoginForm = ({
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     // Perform login logic using formData
-    const token = await getToken(
+    /*const token = await getToken(
       { username: formData.username, password: formData.password, group: 'VG_Default' })
-    setToken(token.token)
+    setToken(token.token)*/
+    // Raise the onSubmit event with the form data
+    onSubmit(formData)
   }
 
   return (

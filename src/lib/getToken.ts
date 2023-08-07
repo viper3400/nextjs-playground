@@ -1,8 +1,10 @@
 'use server'
 
+import { customConfig } from '../../custom-config'
 import { LoginCredentials } from './types'
+import { AuthenticationState } from './types/AuthenticationState'
 
-const apiUrl = process.env.VIDEODB_WEB_API_URL
+const apiUrl = customConfig.apiBaseUrl
 
 export async function getToken(credentials : LoginCredentials) {
   const url = `${apiUrl}/token`
@@ -14,10 +16,20 @@ export async function getToken(credentials : LoginCredentials) {
     body: JSON.stringify(credentials)
   })
 
-  if (!response.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error('Failed to fetch data')
+  let authState: AuthenticationState = {
+    token: '',
+    refreshTuple: '',
+    authState: 'NOT_AUTHENTICATED'
   }
 
-  return response.json()
+  if (response.ok) {
+    const responseJson = await response.json()
+    authState = {
+      token: responseJson.token,
+      refreshTuple: responseJson.refreshTuple,
+      authState: 'AUTHENTICATED'
+    }
+  }
+
+  return authState
 }
