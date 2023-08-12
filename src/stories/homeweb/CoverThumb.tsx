@@ -1,4 +1,4 @@
-
+'use server'
 import Image, { StaticImageData } from 'next/image'
 import { SeriesIcon, FavoriteIcon, FlagIcon, LabeledIcon, VideoLibraryIcon } from './icons'
 
