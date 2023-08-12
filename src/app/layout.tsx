@@ -1,6 +1,6 @@
-
 import AuthenticationProvider from '@/auth-provider'
 import './globals.css'
+import { customConfig } from '../../custom-config'
 
 
 export const metadata = {
@@ -13,10 +13,11 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  if (!customConfig.apiBaseUrl) throw new Error('Api Base Url must be set')
   return (
     <html lang="en">
       <body>
-        <AuthenticationProvider>{children}</AuthenticationProvider>
+        <AuthenticationProvider localStoragePrefix={ customConfig.apiBaseUrl }>{children}</AuthenticationProvider>
       </body>
     </html>
   )

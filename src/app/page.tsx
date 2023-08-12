@@ -11,6 +11,7 @@ import { customConfig } from '../../custom-config'
 
 export default function Home() {
   const { state, setState } = useContext(AuthenticationContext)
+  const { localStoragePrefix } = useContext(AuthenticationContext)
   const handleFormSubmit = async (formData : LoginCredentials) => {
     // Perform login logic using formData
     const response = await getToken({
@@ -22,13 +23,13 @@ export default function Home() {
     console.log('Obtained token:', response.token)
     console.log('status:', response.authState)
     setState(response.authState)
-    setLocalStorageItem(`${customConfig.apiBaseUrl}_token`, response.token)
-    setLocalStorageItem(`${customConfig.apiBaseUrl}_refreshTuple`, response.refreshTuple)
+    setLocalStorageItem(`${localStoragePrefix}_token`, response.token)
+    setLocalStorageItem(`${localStoragePrefix}_refreshTuple`, response.refreshTuple)
     // You can update the state or perform any other logic with the token here
   }
 
   useEffect(() => {
-    const savedToken = getLocalStorageItem(`${customConfig.apiBaseUrl}_token`)
+    const savedToken = getLocalStorageItem(`${localStoragePrefix}_token`)
     if (savedToken && savedToken != '') {
       setState('AUTHENTICATED')
     }
