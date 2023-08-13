@@ -25,7 +25,7 @@ type AuthenticationProviderProps = {
 };
 
 export default function AuthenticationProvider({ children, localStoragePrefix }: AuthenticationProviderProps) {
-  const [authState, setAuthState] = useState<AuthState>('NOT_AUTHENTICATED')
+  const [authState, setAuthState] = useState<AuthState>('AUTHENTICATING')
 
   const authenticationContextValue: AuthenticationProps = {
     state: authState,
