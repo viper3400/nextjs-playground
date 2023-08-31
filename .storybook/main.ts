@@ -7,6 +7,9 @@ const config: StorybookConfig = {
     name: '@storybook/addon-styling',
     options: {}
   }],
+  core: {
+    disableTelemetry: true,
+  },
   framework: {
     name: "@storybook/nextjs",
     options: {}
