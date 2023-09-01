@@ -1,5 +1,4 @@
 name: Build on each PR
-
 on:
   push:
     branches:
@@ -7,7 +6,6 @@ on:
   pull_request:
     branches:
       - main
-
 jobs:
   storybook:
     runs-on: ubuntu-latest
@@ -18,18 +16,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Cache Node.js dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
       - name: Install dependencies
         run: npm ci
       - name: Build Storybook
         run: npm run build-storybook
-
   nextjs:
     runs-on: ubuntu-latest
     steps:
@@ -39,18 +29,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Cache Node.js dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
       - name: Install dependencies
         run: npm ci
       - name: Build Next.js app
         run: npm run build
-
   lint:
     runs-on: ubuntu-latest
     steps:
@@ -60,13 +42,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-      - name: Cache Node.js dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
       - name: Install dependencies
         run: npm ci
       - name: Lint
