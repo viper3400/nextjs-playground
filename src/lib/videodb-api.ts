@@ -423,7 +423,7 @@ export class HttpClient<SecurityDataType = unknown> {
   private customFetch = (...fetchParams: Parameters<typeof fetch>) => fetch(...fetchParams);
 
   private baseApiParams: RequestParams = {
-    credentials: "same-origin",
+    //credentials: "same-origin",
     headers: {},
     redirect: "follow",
     referrerPolicy: "no-referrer",
@@ -536,7 +536,10 @@ export class HttpClient<SecurityDataType = unknown> {
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
       {};
+    console.log('secureParams')
+    console.log(secureParams)
     const requestParams = this.mergeRequestParams(params, secureParams);
+    console.log(requestParams)
     const queryString = query && this.toQueryString(query);
     const payloadFormatter = this.contentFormatters[type || ContentType.Json];
     const responseFormat = format || requestParams.format;
@@ -1065,6 +1068,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         method: "GET",
         query: query,
         secure: true,
+        format: 'json', 
         ...params,
       }),
 
@@ -1803,6 +1807,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         path: `/info`,
         method: "GET",
         secure: true,
+        format: 'json',
         ...params,
       }),
   };

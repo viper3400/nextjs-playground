@@ -42,12 +42,16 @@ export async function getToken(credentials : LoginCredentials) {
 
     const config = {
       baseUrl: customConfig.apiBaseUrl? customConfig.apiBaseUrl : 'error',
-      securityWorker: ( token: any ) => {
+      securityWorker: ( token: any | null ) => {
         console.log('Security Worker was here.')
-        console.log(`Bearer ${responseJson.token}`)
-        return {
-          headers: {
-            Authorization: `Bearer ${token} `
+
+        if (token) {
+          var bearer = 'Bearer ' + token.token
+          console.log(bearer)
+          return {
+            headers: {
+              'Authorization': bearer
+            }
           }
         }
       }
@@ -55,12 +59,16 @@ export async function getToken(credentials : LoginCredentials) {
 
     const authApi = new Api(config)
 
+    authApi.setSecurityData({ token: responseJson.token })
 
+
+    let info
 
     try {
-      const info =  await authApi.info.infoIndex({ secure: true })
+      console.log('try info')
+      info =  await authApi.info.infoIndex()
       console.log('info')
-      console.log(info)
+      console.log(info.data)
     }
     catch (e) {
       console.log('y')
