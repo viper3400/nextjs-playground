@@ -1,4 +1,6 @@
 name: Build on each PR
+env: 
+  CI: true
 on:
   push:
     branches:
@@ -33,6 +35,10 @@ jobs:
         run: npm ci
       - name: Build Next.js app
         run: npm run build
+      - name: Generate typedoc
+        run: npm run typedoc
+      - name: Generate typedoc with markdown
+        run: npm run typedoc:md
   lint:
     runs-on: ubuntu-latest
     steps:

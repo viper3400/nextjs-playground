@@ -1,0 +1,14 @@
+{
+    "$schema": "https://typedoc.org/schema.json",
+    "tsconfig": "tsconfig.json",
+    "entryPoints": [
+        "./src/auth-provider.tsx",
+        "./src/contexts.ts",
+        "./src/lib/*"
+    ],
+    "out": "typedoc-out",
+    "plugin": ["typedoc-plugin-missing-exports"],
+    "compilerOptions": {
+        "exclude": ["./src/stories"]
+    }
+}

@@ -6,6 +6,8 @@ import { getTemperature } from '@/lib/weather'
 import { getToken } from '@/lib/getToken'
 import { LoginForm } from '@/stories/homeweb/LoginForm'
 import { AuthenticationContext } from '@/auth-provider'
+import { Button } from '@/stories/Button'
+import { removeLocalStorage } from '@/lib/localStorageManager'
 import { JaxxButton } from './jaxx-button'
 import { DogImage } from './dog-image'
 
@@ -31,6 +33,16 @@ export const Dog = () => {
       </div>
       <div>
         <JaxxButton label="Show me a random dog" onClick={ handleClick } disabled={ buttonDisabled }/>
+      </div>
+      <div>
+        <Button
+          label="Clear local storage"
+          onClick={ () => {
+            removeLocalStorage()
+            setState('NOT_AUTHENTICATED')
+          } }
+          size="large"
+        />
       </div>
       <div>
         <p>Current temperature in Zollikofen: {temperature} °C</p>
