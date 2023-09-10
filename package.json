@@ -9,7 +9,9 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "typedoc": "typedoc --logLevel Verbose",
+    "typedoc:md": "typedoc --plugin typedoc-plugin-markdown"
   },
   "dependencies": {
     "@types/node": "18.17.15",
@@ -38,6 +40,12 @@
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-storybook": "^0.6.11",
     "storybook": "^7.0.7",
-    "swagger-typescript-api": "^13.0.3"
+    "swagger-typescript-api": "^13.0.3",
+    "typedoc": "^0.25.1",
+    "typedoc-plugin-markdown": "^3.16.0",
+    "typedoc-plugin-missing-exports": "^2.1.0"
+  },
+  "volta": {
+    "node": "18.17.1"
   }
 }
