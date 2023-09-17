@@ -4,20 +4,22 @@ import { useContext, useEffect } from 'react'
 import { AuthenticationContext } from '@/auth-provider'
 import { Dog } from '@/components/dog'
 import { LoginForm } from '@/stories/homeweb/LoginForm'
-import { getToken } from '@/lib/getToken'
 import { LoginCredentials } from '@/lib/types'
 import { getLocalAuthenticationState, setLocalStorageItem } from '@/lib/localStorageManager'
 
 export default function Home() {
   const { state, setState } = useContext(AuthenticationContext)
   const { localStoragePrefix } = useContext(AuthenticationContext)
+  const { authService } = useContext(AuthenticationContext)
   const handleFormSubmit = async (formData : LoginCredentials) => {
+    console.log('xy: ')
     // Perform login logic using formData
-    const response = await getToken({
+    const response = await authService({
       username: formData.username,
       password: formData.password,
       group: 'VG_Default'
     })
+    console.log('x: ' + response)
 
     setState(response.authState)
     setLocalStorageItem(`${localStoragePrefix}_token`, response.token)

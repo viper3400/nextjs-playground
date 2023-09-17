@@ -2,6 +2,8 @@
 
 import { createContext, ReactNode, useState } from 'react'
 import { AuthState } from '@/lib/types/AuthState'
+import { customConfig } from '../custom-config'
+import { getApiToken } from './lib/api-auth-service'
 
 /**
  * Props for the AuthenticationProvider component.
@@ -9,6 +11,7 @@ import { AuthState } from '@/lib/types/AuthState'
 type AuthenticationProps = {
   state: AuthState // The authentication state.
   localStoragePrefix: string // Prefix for local storage.
+  authService: typeof getApiToken
   setState: (newState: AuthState) => void // A function to update the authentication state.
 };
 
@@ -18,6 +21,7 @@ type AuthenticationProps = {
 const defaultAuthenticationProps: AuthenticationProps = {
   state: 'NOT_AUTHENTICATED',
   localStoragePrefix: 'default',
+  authService: customConfig.authService,
   setState: () => {}, // Initial function, gets replaced by the actual function.
 }
 
@@ -49,6 +53,7 @@ export default function AuthenticationProvider({
   const authenticationContextValue: AuthenticationProps = {
     state: authState,
     localStoragePrefix: localStoragePrefix,
+    authService: customConfig.authService,
     setState: setAuthState, // Provide the actual function to update the authentication state.
   }
 
