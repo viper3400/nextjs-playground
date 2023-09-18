@@ -61,7 +61,7 @@ export const DropdownMenu = ({ label, entries,openRight, onSelectEntry }: Dropdo
           </div>
         </button>
         { isFocused && (
-          <div className={ `absolute ${openRight ? 'right-0' : 'left-0'} top-full rounded-md shadow-lg` }>
+          <div className={ `absolute z-10 ${openRight ? 'right-0' : 'left-0'} top-full rounded-md shadow-lg` }>
 
             <MappedEntries
               entries={ entries }
