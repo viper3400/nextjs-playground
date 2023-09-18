@@ -78,6 +78,28 @@ for (let i = 0; i < 20; i++) {
 
 }
 
+const suggestions = [
+  'Apple',
+  'Banana',
+  'Cherry',
+  'Date',
+  'Elderberry',
+  'Fig',
+  'Grape',
+  'Honeydew',
+  'Kiwi',
+  'Lemon',
+  'Mango',
+  'Orange',
+  'Peach',
+  'Pear',
+  'Quince',
+  'Raspberry',
+  'Strawberry',
+  'Tomato',
+  'Watermelon',
+]
+
 export default meta
 type Story = StoryObj<typeof MovieSearchPage>;
 
@@ -92,6 +114,7 @@ export const Default: Story = {
         console.log('Menu entry selected')
       }
     },
-    coverThumbs: data
+    coverThumbs: data,
+    suggestions: suggestions
   }
 }
