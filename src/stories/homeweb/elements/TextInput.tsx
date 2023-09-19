@@ -21,6 +21,10 @@ interface TextInputProps {
     dataTestAttribute?: string
     content: string
     onChange: (inputName: string, value: string) => void
+    /**
+     * Classes that are applied to the outer div of the component
+     */
+    classNames?: string
 }
 /**
  * Primary UI Component for user to enter text input
@@ -34,6 +38,7 @@ export const TextInput = ({
   setFocus = false,
   invalid = false,
   validationMessage = '',
+  classNames,
   onChange
 }: TextInputProps) => {
   const [inputFocused, setInputFocused ] = useState(false)
@@ -54,7 +59,7 @@ export const TextInput = ({
 
   return (
     <>
-      <div className="flex flex-col space-y-2 p-2">
+      <div className= { 'flex flex-col space-y-2 ' + classNames }>
         <div>
           <div
             className={ `transition duration-700 text-sm ${
