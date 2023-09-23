@@ -8,7 +8,7 @@ import { HeaderProperties } from './elements/HeaderProperties'
 interface MovieSearchPageProperties {
     headerProperties: HeaderProperties
     coverThumbs: CoverThumbProps[]
-    suggestions: any
+    suggestions: string[]
 }
 
 export const MovieSearchPage = (props: MovieSearchPageProperties) => {

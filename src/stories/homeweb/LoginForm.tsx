@@ -61,6 +61,7 @@ export const LoginForm = ({
         <form onSubmit={ handleSubmit }>
           <div className="text-2xl text-slate-700 pb-8 pl-2">{dialogTitle}</div>
           <TextInput
+            classNames='p-4'
             setFocus
             label={ usernameLabel }
             content={ formData.username }
@@ -68,6 +69,7 @@ export const LoginForm = ({
             inputName="username"
             data-test="username-input" />
           <TextInput
+            classNames='p-4'
             label={ passwordLabel }
             password
             content={ formData.password }
@@ -84,7 +86,6 @@ export const LoginForm = ({
           </div>
         </form>
       </div>
-
     </>
   )
 }

@@ -17,6 +17,7 @@ type Story = StoryObj<typeof TextInput>;
 
 export const Text: Story = {
   args: {
+    classNames: 'p-4',
     inputName: 'Username',
     label: 'Username'
   }
