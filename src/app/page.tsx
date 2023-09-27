@@ -10,9 +10,9 @@ import { getLocalAuthenticationState, setLocalStorageItem } from '@/lib/localSto
 export default function Home() {
   const { state, setState } = useContext(AuthenticationContext)
   const { localStoragePrefix } = useContext(AuthenticationContext)
-  const { authService } = useContext(AuthenticationContext)
+  const { authService, baseUrl } = useContext(AuthenticationContext)
   const handleFormSubmit = async (formData : LoginCredentials) => {
-    console.log('xy: ')
+    console.log('xy: ' + baseUrl)
     // Perform login logic using formData
     const response = await authService({
       username: formData.username,

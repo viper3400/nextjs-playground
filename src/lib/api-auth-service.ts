@@ -8,10 +8,8 @@ import { Api, LoginModel } from './videodb-api'
 
 export const getApiToken = async (credentials: LoginCredentials) : Promise<AuthenticationState>  => {
 
-  const apiUrl = customConfig.apiBaseUrl
-
   const vApi = new Api()
-  vApi.baseUrl = customConfig.apiBaseUrl? customConfig.apiBaseUrl : 'error'
+  vApi.baseUrl = customConfig.apiBaseUrl? customConfig.apiBaseUrl : 'error: base url not set'
   const loginModel : LoginModel = {
     username: credentials.username,
     password: credentials.password,
@@ -34,7 +32,7 @@ export const getApiToken = async (credentials: LoginCredentials) : Promise<Authe
     }
 
     const config = {
-      baseUrl: customConfig.apiBaseUrl? customConfig.apiBaseUrl : 'error',
+      baseUrl: customConfig.apiBaseUrl,
       securityWorker: ( token: any | null ) => {
         console.log('Security Worker was here.')
 

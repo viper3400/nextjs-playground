@@ -11,6 +11,7 @@ import { getApiToken } from './lib/api-auth-service'
 type AuthenticationProps = {
   state: AuthState // The authentication state.
   localStoragePrefix: string // Prefix for local storage.
+  baseUrl: string
   authService: typeof getApiToken
   setState: (newState: AuthState) => void // A function to update the authentication state.
 };
@@ -21,6 +22,7 @@ type AuthenticationProps = {
 const defaultAuthenticationProps: AuthenticationProps = {
   state: 'NOT_AUTHENTICATED',
   localStoragePrefix: 'default',
+  baseUrl: customConfig.apiBaseUrl? customConfig.apiBaseUrl : 'error',
   authService: customConfig.authService,
   setState: () => {}, // Initial function, gets replaced by the actual function.
 }
@@ -53,6 +55,7 @@ export default function AuthenticationProvider({
   const authenticationContextValue: AuthenticationProps = {
     state: authState,
     localStoragePrefix: localStoragePrefix,
+    baseUrl: customConfig.apiBaseUrl? customConfig.apiBaseUrl : 'error',
     authService: customConfig.authService,
     setState: setAuthState, // Provide the actual function to update the authentication state.
   }
