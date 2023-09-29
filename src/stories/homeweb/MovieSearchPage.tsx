@@ -1,4 +1,5 @@
 
+import { useState } from 'react'
 import { CoverGrid } from './CoverGrid'
 import { CoverThumbProps } from './CoverThumb'
 import { AutoComplete } from './elements/AutoComplete'
@@ -12,17 +13,12 @@ interface MovieSearchPageProperties {
 }
 
 export const MovieSearchPage = (props: MovieSearchPageProperties) => {
+  const [ isLoading, setIsLoading ] = useState(false)
   return (
     <>
-      <Header
-        leftMenuEntries = { props.headerProperties.leftMenuEntries }
-        mainLabel= { props.headerProperties.mainLabel }
-        onSelectMenuEntry={ () => {} }
-        rightMenuEntries={ props.headerProperties.rightMenuEntries }
-        rightMenuLabel={ props.headerProperties.rightMenuLabel }
-      />
+      <Header { ...props.headerProperties } />
       <AutoComplete suggestions = { props.suggestions } />
-      <CoverGrid coverThumbs={ props.coverThumbs } />
+      <CoverGrid coverThumbs={ props.coverThumbs } isLoading={ isLoading } />
     </>
   )
 }
