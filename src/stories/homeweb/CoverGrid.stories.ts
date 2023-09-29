@@ -63,3 +63,7 @@ for (let i = 0; i < 20; i++) {
 export const Default : Story = {
   args: { coverThumbs: data }
 }
+
+export const Loading: Story = {
+  args: { coverThumbs: data, isLoading: true }
+}
