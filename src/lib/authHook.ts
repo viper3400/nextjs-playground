@@ -9,14 +9,12 @@ export function useAuthentication() {
   const { state, setState, authService, baseUrl, localStoragePrefix } = useContext(AuthenticationContext)
 
   const handleFormSubmit = async (formData: LoginCredentials) => {
-    console.log('xy: ' + baseUrl)
     // Perform login logic using formData
     const response = await authService({
       username: formData.username,
       password: formData.password,
       group: 'VG_Default'
     })
-    console.log('x: ' + response)
 
     setState(response.authState)
     setLocalStorageItem(`${localStoragePrefix}_token`, response.token)
