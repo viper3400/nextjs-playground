@@ -5,7 +5,6 @@ import { useAuthentication } from '@/lib/authHook'
 import { AuthenticationContext } from '@/auth-provider'
 import { Dog } from '@/components/dog'
 import { LoginForm } from '@/stories/homeweb/LoginForm'
-import { Spinner } from '@/stories/homeweb/elements/Spinner'
 
 export default function Home() {
   const { state } = useContext(AuthenticationContext)
@@ -14,7 +13,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {state === 'AUTHENTICATING' &&  (
-        <div> <Spinner /> </div>
+        <div></div>
       )}
       {state === 'NOT_AUTHENTICATED' && (
         <LoginForm
