@@ -3,7 +3,6 @@
 import { useContext, useState } from 'react'
 import { getDog } from '@/lib/dogs'
 import { getTemperature } from '@/lib/weather'
-import { getToken } from '@/lib/getToken'
 import { LoginForm } from '@/stories/homeweb/LoginForm'
 import { AuthenticationContext } from '@/auth-provider'
 import { Button } from '@/stories/Button'

@@ -1,6 +1,7 @@
 'use server'
 
 import { customConfig } from '../../custom-config'
+import { apiBearerHeader } from './api-bearer-header'
 import { LoginCredentials } from './types'
 import { AuthenticationState } from './types/AuthenticationState'
 import { Api, LoginModel } from './videodb-api'
@@ -31,24 +32,7 @@ export const getApiToken = async (credentials: LoginCredentials) : Promise<Authe
       authState: 'AUTHENTICATED'
     }
 
-    const config = {
-      baseUrl: customConfig.apiBaseUrl,
-      securityWorker: ( token: any | null ) => {
-        console.log('Security Worker was here.')
-
-        if (token) {
-          var bearer = 'Bearer ' + token.token
-          console.log(bearer)
-          return {
-            headers: {
-              'Authorization': bearer
-            }
-          }
-        }
-      }
-    }
-
-    const authApi = new Api(config)
+    const authApi = new Api(apiBearerHeader(responseJson.token))
 
     authApi.setSecurityData({ token: responseJson.token })
 
