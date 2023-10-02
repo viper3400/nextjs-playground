@@ -8,7 +8,7 @@ export interface CoverGridProps {
 
 const LoadingSpinner = () => (
   <div className='flex justify-center mt-4'>
-    <Spinner />
+    <Spinner size='medium'/>
   </div>
 )
 
