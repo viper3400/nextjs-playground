@@ -1,5 +1,6 @@
 import AuthenticationProvider from '@/auth-provider'
 import './globals.css'
+import SessionWrapper from '@/session-wrapper'
 import { customConfig } from '../../custom-config'
 
 
@@ -17,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AuthenticationProvider localStoragePrefix={ customConfig.apiBaseUrl }>{children}</AuthenticationProvider>
+        { children }
       </body>
     </html>
   )
