@@ -1,30 +1,17 @@
-'use client'
 
-import { useContext } from 'react'
-import { useAuthentication } from '@/lib/authHook'
-import { AuthenticationContext } from '@/auth-provider'
+import { getServerSession } from 'next-auth'
 import { Dog } from '@/components/dog'
-import { LoginForm } from '@/stories/homeweb/LoginForm'
+import { auth } from '@/auth'
+import Github from '@/components/github'
 
-export default function Home() {
-  const { state } = useContext(AuthenticationContext)
-  const { handleFormSubmit } = useAuthentication()
-
+export default async function Home() {
+  const session = await auth()
+  console.log(session)
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {state === 'AUTHENTICATING' &&  (
-        <div></div>
-      )}
-      {state === 'NOT_AUTHENTICATED' && (
-        <LoginForm
-          dialogTitle={ 'Anmeldung' }
-          usernameLabel={ 'Benutzername' }
-          passwordLabel={ 'Passwort' }
-          logInButtonLabel={ 'Anmelden' }
-          onSubmit={ handleFormSubmit }
-        />
-      )}
-      {state === 'AUTHENTICATED' && <Dog />}
+      <div></div>
+      { !session && <Github /> }
+      { session && <Dog /> }
     </main>
   )
 }

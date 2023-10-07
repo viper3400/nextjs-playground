@@ -1,6 +1,7 @@
 'use client'
 
 import { useContext, useState } from 'react'
+import { signOut } from 'next-auth/react'
 import { getDog } from '@/lib/dogs'
 import { getTemperature } from '@/lib/weather'
 import { LoginForm } from '@/stories/homeweb/LoginForm'
@@ -48,6 +49,11 @@ export const Dog = () => {
             removeLocalStorage()
             setState('NOT_AUTHENTICATED')
           } }
+          size="large"
+        />
+        <Button
+          label="Sign Out"
+          onClick={ () => signOut() }
           size="large"
         />
       </div>
