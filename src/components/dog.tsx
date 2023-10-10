@@ -9,6 +9,7 @@ import { AuthenticationContext } from '@/auth-provider'
 import { Button } from '@/stories/Button'
 import { removeLocalStorage } from '@/lib/localStorageManager'
 import { Spinner } from '@/stories/homeweb/elements/Spinner'
+import { getServerInfo } from '@/lib/server-info'
 import { JaxxButton } from './jaxx-button'
 import { DogImage } from './dog-image'
 
@@ -17,6 +18,7 @@ export const Dog = () => {
   const [ dogImage, setDogImage] = useState('https://autohub.ir/static/newapi/web/img/not_found.png')
   const [ loading, setLoading] = useState(false)
   const [ temperature, setTemperature] = useState('not set')
+  const [ serverInfo, setServerInfo ] = useState('not set')
   const [ buttonDisabled, setButtonDisabled] = useState(false)
   const { state, setState } = useContext(AuthenticationContext)
 
@@ -25,8 +27,10 @@ export const Dog = () => {
     setButtonDisabled(true)
     const dog = await getDog()
     const temp = await getTemperature()
+    const serverInfo = await getServerInfo()
     setTemperature(temp.current_weather.temperature)
     setDogImage(dog.message)
+    setServerInfo(serverInfo)
     setLoading(false)
     setButtonDisabled(false)
   }
@@ -59,6 +63,7 @@ export const Dog = () => {
       </div>
       <div>
         <p>Current temperature in Zollikofen: {temperature} °C</p>
+        <p>ServerInfo: {serverInfo}</p>
       </div>
     </>
   )

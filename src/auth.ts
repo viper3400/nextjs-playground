@@ -30,14 +30,13 @@ export const config = {
         const username = credentials?.username ? credentials.username : ''
         const password = credentials?.password ? credentials.password : ''
         const group = customConfig.viewgroup ? customConfig.viewgroup : ''
-        console.log(group)
         const apiCredentials: LoginCredentials = {
           username: username,
           password: password,
           group: group
         }
         const authResult = await customConfig.authService(apiCredentials)
-        console.log(authResult)
+
         if (authResult && authResult.authState === 'AUTHENTICATED') {
           const user = { id: username, name: username }
           return user

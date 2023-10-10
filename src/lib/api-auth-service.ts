@@ -2,6 +2,8 @@
 
 import { customConfig } from '../../custom-config'
 import { apiBearerHeader } from './api-bearer-header'
+import { saveOrUpdateDbSession } from './db-session-handling/saveOrUpdateSession'
+
 import { LoginCredentials } from './types'
 import { AuthenticationState } from './types/AuthenticationState'
 import { Api, LoginModel } from './videodb-api'
@@ -20,7 +22,7 @@ export const getApiToken = async (credentials: LoginCredentials) : Promise<Authe
 
   let authState: AuthenticationState = {
     token: '',
-    refreshTuple: '',
+    refreshTuple: undefined,
     authState: 'NOT_AUTHENTICATED'
   }
 
@@ -28,12 +30,16 @@ export const getApiToken = async (credentials: LoginCredentials) : Promise<Authe
     const responseJson = await response.json()
     authState = {
       token: responseJson.token,
-      refreshTuple: responseJson.refreshTuple,
+      refreshTuple: {
+        item1: responseJson.refreshTuple.item1,
+        item2: responseJson.refreshTuple.item2
+      },
       authState: 'AUTHENTICATED'
     }
 
     const authApi = new Api(apiBearerHeader(responseJson.token))
 
+    await saveOrUpdateDbSession(credentials.username, authState)
     authApi.setSecurityData({ token: responseJson.token })
 
     let info
