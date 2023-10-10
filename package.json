@@ -56,6 +56,6 @@
     "typedoc-plugin-missing-exports": "^2.1.0"
   },
   "volta": {
-    "node": "18.18.0"
+    "node": "18.18.1"
   }
 }
