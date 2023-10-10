@@ -16,3 +16,14 @@ import { Meta } from '@storybook/blocks'
 # Needfull Links
 
 - [Configure prisma db logging](https://www.prisma.io/docs/concepts/components/prisma-client/working-with-prismaclient/logging)
+
+# Authentication and session handling
+## NextAuth session vs. videodb session
+
+A user must be authenticated to interact with most of the function of the NextJs pages. A user has to identify using their credentials
+againts the VideoDbApi. If credentials are valid, api returns videodb session information (api token, refresh token). With this, user
+is counted as "authenticated". This authentication state is handled by the NextAuth session.
+
+Due to the scope of NextAuth, videob session informations are not persisted in this NextAuth session. Tough, this videodb session
+informations are needed for any upcoming data request to the VideoDbApi in behalf of the authenticated user.
+

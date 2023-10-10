@@ -2,7 +2,7 @@
 
 import { customConfig } from '../../custom-config'
 import { apiBearerHeader } from './api-bearer-header'
-import { saveOrUpdateDbSession } from './db-session-handling/SaveOrUpdateSession'
+import { saveOrUpdateDbSession } from './db-session-handling/saveOrUpdateSession'
 
 import { LoginCredentials } from './types'
 import { AuthenticationState } from './types/AuthenticationState'
