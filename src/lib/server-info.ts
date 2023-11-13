@@ -12,8 +12,6 @@ export async function getServerInfo() {
   let info : InfoResult = { ApiServerVersion: '' }
 
   const response = await api.info.infoIndex()
-  console.log('response')
-  console.log(response)
   if (response.ok)
   {
     info = response.data as unknown as InfoResult

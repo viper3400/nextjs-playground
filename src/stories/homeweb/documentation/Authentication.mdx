@@ -1,0 +1,182 @@
+import { Meta, tab } from '@storybook/blocks'
+import { Mermaid } from 'mdx-mermaid/Mermaid'
+import Table from './../Table';
+
+<Meta title="HomeWeb/Documentation/Authentication" />
+# Authentication and session handling
+## NextAuth session vs. videodb session
+
+- A user must be authenticated to interact with most of the functions of the NextJs pages.
+- A user has to identify using their credentials against the VideoDbApi. 
+- If credentials are valid, the API returns videodb session information (api token, refresh token). 
+- With this, user is "authenticated". 
+- This authentication state is handled by the NextAuth session.
+- Due to the scope of NextAuth, videob session informations are not persisted in this NextAuth session. 
+- Tough, this videodb session informations are needed for any upcoming data request to the VideoDbApi in behalf of the authenticated user.
+
+
+## Use Cases
+
+- We need to support different use cases depending on the state of the NextAuthSession and the VidoeDbSession.
+- For NextAuth there may be a session (NextAuthSession valid) or no session (NextAuthSession).
+- For VideoDb the session state is described by a session token that can be valid or invalid.
+  - When we have an invalid token, there is a refresh token for the session (which can be valid or invalid itself).
+  - State of VideoDb session can just be retrieved by making a request.
+
+This table show the combinations we have to cover:
+
+<Table
+  headers={['Use Case', 'NextAuthSession','Credentials', 'VideoDb Token', 'Refresh Token']}
+  rows={[
+    ['UC 1','invalid', 'valid', 'does not matter', 'does not matter'],
+    ['UC 2','invalid', 'invalid', 'does not matter', 'does not matter'],
+    ['UC 3','valid', 'does not matter', 'valid', 'does not matter'],
+    ['UC 4', 'valid', 'does not matter', 'invalid', 'valid'],
+    ['UC 5', 'valid', 'does not matter', 'invalid', 'invalid'],
+  ]}
+/>
+
+### Use Case 1 (implemented)
+
+In this use case we do not have a NextAuth session. So we have to authorize against VideoDb API again.
+It does not play a role, if we probably would have a valid VideoDb session, as any request against the 
+autorization API will serve a new token & refresh token.
+
+This is the "normal" use case, as well, if a user is not logged in.
+
+<Mermaid chart={`sequenceDiagram
+  actor User
+  participant NextJs
+  participant NextAuth
+  participant VideoDbAuthService
+  participant PrismaDb
+  participant VideoDbApi
+
+  activate User
+  User->>NextJs: request page
+  activate NextJs
+  NextJs ->> NextAuth: get NextAuthSession
+  activate NextAuth
+  NextAuth ->> NextJs: no session found
+  deactivate NextAuth
+  NextJs ->> User: Present login dialog
+  deactivate NextJs
+  User->>NextJs: provide valid credentials
+  activate NextJs
+  NextJs ->> NextAuth: handle auth request
+  activate NextAuth
+  NextAuth ->> VideoDbAuthService: authorize()
+  activate VideoDbAuthService
+  VideoDbAuthService ->> VideoDbApi: send auth request
+  activate VideoDbApi
+  VideoDbApi ->> VideoDbAuthService: provide videodb session information
+  deactivate VideoDbApi
+  VideoDbAuthService ->> PrismaDb: create or update session entry
+  VideoDbAuthService ->> NextAuth: session
+  deactivate VideoDbAuthService
+  NextAuth ->> NextJs: provide NextAuth session infos
+  deactivate NextAuth
+  NextJs ->> User: provide authenticated access
+  deactivate NextJs
+  deactivate User
+`} />
+
+### Use Case 2 (partly implemented)
+
+This is just a slight variation of the first use case. This time the user provides wrong credentials.
+This use case is just partly covered. There is now just an error page in UI instead of stating that
+credentials were wrong.
+
+<Mermaid chart={`sequenceDiagram
+  actor User
+  participant NextJs
+  participant NextAuth
+  participant VideoDbAuthService
+  participant PrismaDb
+  participant VideoDbApi
+
+  activate User
+  User->>NextJs: request page
+  activate NextJs
+  NextJs ->> NextAuth: get NextAuthSession
+  activate NextAuth
+  NextAuth ->> NextJs: no session found
+  deactivate NextAuth
+  NextJs ->> User: Present login dialog
+  deactivate NextJs
+  User->>NextJs: provide invalid credentials
+  activate NextJs
+  NextJs ->> NextAuth: handle auth request
+  activate NextAuth
+  NextAuth ->> VideoDbAuthService: authorize()
+  activate VideoDbAuthService
+  VideoDbAuthService ->> VideoDbApi: send auth request
+  activate VideoDbApi
+  VideoDbApi ->> VideoDbAuthService: unauthorized
+  deactivate VideoDbApi
+  VideoDbAuthService ->> NextAuth: no session
+  deactivate VideoDbAuthService
+  NextAuth ->> NextJs: provide NextAuth session infos
+  deactivate NextAuth
+  NextJs ->> User: provide authentication error
+  deactivate NextJs
+  deactivate User
+`} />
+
+### Use Case 3 (demo implemented)
+
+This use case assumes that a user is logged in and uses the VideoDbApi. This is considered the normal operation mode.
+
+<Mermaid chart={`sequenceDiagram
+  autonumber
+  actor User
+  participant NextJs
+  participant VideoDbService
+  participant NextAuth
+  participant PrismaDb
+  participant VideoDbApi
+
+  activate User
+  User->>NextJs: request page
+  activate NextJs
+  NextJs ->> VideoDbService: request ()
+  activate VideoDbService
+  VideoDbService ->> NextAuth: get NextAuthSession
+  activate NextAuth
+  NextAuth ->> VideoDbService: session found / authorized
+  deactivate NextAuth
+ 
+  VideoDbService ->> PrismaDb: getSessionInfos()
+  activate PrismaDb
+  PrismaDb ->> VideoDbService: provideSessionInfos()
+  deactivate PrismaDb
+  VideoDbService ->> VideoDbApi: request()
+  activate VideoDbApi
+  VideoDbApi ->> VideoDbService: answerRequest()
+  deactivate VideoDbApi
+  VideoDbService ->> NextJs: result()
+  deactivate VideoDbService
+  NextJs ->> User: displayResult()
+  deactivate NextJs
+  deactivate User
+`} />
+
+
+
+#### What can go wrong?
+**Invalid NextAuth session** 
+
+What can go wrong here, is that sequence (3) may return no session in sequence (4). This is should immediatly
+sign out the user from the session and this is assumed to be base functionality of NextAuth.js. The only way
+we can imagine this even to happen, is that the browser stays open for a longer time with the page opened
+without reload.
+
+**No session information on PrismaDb**
+
+Request in sequence (5) may not result in session information for the requested user session. Therefor system 
+should sign out. But I did not get working this, yet.
+
+**Error on API request**
+
+This should be coverd in a separate topic. There a multiple things here, that may not went as well, as expected, 
+between sequence (7) and (8).
