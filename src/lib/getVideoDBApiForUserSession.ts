@@ -6,6 +6,7 @@ import { apiBearerHeader } from './api-bearer-header'
 import prisma from './db-session-handling/prisma'
 import { Api } from './videodb-api'
 
+
 export async function getVideoDBApiForUserSession() {
   const session = await auth()
   if (!session?.user?.name) throw new Error('no session user')
@@ -14,7 +15,8 @@ export async function getVideoDBApiForUserSession() {
       username: session?.user?.name
     }
   })
-  if(!videodbSession)  throw new Error('no videodb session')
+  if(!videodbSession)
+    throw new Error('no videodb session')
 
   const authApi = new Api(apiBearerHeader(videodbSession.token))
   authApi.baseUrl = customConfig.apiBaseUrl? customConfig.apiBaseUrl : 'error: base url not set'

@@ -44,10 +44,7 @@ export const getApiToken = async (credentials: LoginCredentials) : Promise<Authe
 
     let info
     try {
-      console.log('try info')
       info =  await authApi.info.infoIndex()
-      console.log('info')
-      console.log(info.data)
     }
     catch (e) {
       console.log('y')
