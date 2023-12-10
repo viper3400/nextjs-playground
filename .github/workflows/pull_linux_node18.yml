@@ -52,12 +52,3 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
-  delete_runs:
-    runs-on: ubuntu-latest
-    needs: [storybook, lint, nextjs]
-    if: ${{ always() }}
-    steps:
-      - name: Delete workflow runs
-        uses: dmvict/clean-workflow-runs@v1.2.1
-        with:
-          token: ${{ secrets.DELETE_WORKFLOW }}
