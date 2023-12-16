@@ -1,0 +1,33 @@
+import { Meta, tab } from '@storybook/blocks'
+import { Mermaid } from 'mdx-mermaid/Mermaid'
+import Table from './../Table';
+
+<Meta title="HomeWeb/Documentation/Getting Started" />
+
+# Project Setup
+
+## Environment Variables
+Find the `.env` configuration file in the root folder of the project.
+It's recommended to copy this file into `.env.local`
+(see [environment variables in Next.js](https://nextjs.org/docs/pages/building-your-application/configuring/environment-variables)
+for further informations).
+
+As this file may contain sensible data please make sure not to commit it into your repo.
+
+<Table 
+headers={['Setting','Description','Example']}
+rows={[
+    ['VIDEODB_WEB_API_URL','Url to the VideoDB API server','VIDEODB_WEB_API_URL="https://yourserver.de/"'],
+    ['NEXTAUTH_SECRET','A random string is used to hash tokens, sign/encrypt cookies and generate cryptographic keys.','NEXTAUTH_SECRET="c6/ob+/DwWOAu46M9nPpMUzZtdPN2hlAy3pgQ4dg="'],
+    ['DEFAULT_VIEWGROUP','VideoDB Users belong to viewgroups. For now we have just one fixed.','DEFAULT_VIEWGROUP="VG_Default"',]
+]}/>
+
+### Create a NEXTAUTH_SECRET
+
+You can run `openssl rand -base64 32` to quickly create a good value on the command line.
+
+See [NextAuth.js options](https://next-auth.js.org/configuration/options) for more informations.
+
+# PrismaDb Setup
+
+`prisma migrate dev --name init`
