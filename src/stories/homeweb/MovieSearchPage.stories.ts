@@ -118,3 +118,19 @@ export const Default: Story = {
     suggestions: suggestions
   }
 }
+
+export const WithoutResult: Story = {
+  args: {
+    headerProperties: {
+      mainLabel: 'Filmdatenbank',
+      leftMenuEntries: menuEntries,
+      rightMenuEntries: rightMenuEntries,
+      rightMenuLabel: 'JANE.DOE',
+      onSelectMenuEntry: () => {
+        console.log('Menu entry selected')
+      }
+    },
+    coverThumbs: [],
+    suggestions: suggestions
+  }
+}
