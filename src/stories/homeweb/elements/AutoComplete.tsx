@@ -2,7 +2,12 @@ import React, { useState } from 'react'
 import { TextInput } from './TextInput'
 import { MenuEntry } from './MenuEntry'
 
-export const AutoComplete = ({ suggestions } : any) => {
+interface AutoCompleteProperties {
+  suggestions: string[]
+  onInputValueChange: (value: string) => void
+}
+
+export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteProperties) => {
   const [inputValue, setInputValue] = useState<string>('')
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -10,6 +15,7 @@ export const AutoComplete = ({ suggestions } : any) => {
 
   const handleInputChange = (inputName: string, value: string) => {
     const inputValue = value
+    onInputValueChange(inputValue)
     setInputValue(inputValue)
 
     // Filter suggestions based on the input value
