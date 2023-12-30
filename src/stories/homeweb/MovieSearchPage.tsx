@@ -1,4 +1,3 @@
-
 import { useState } from 'react'
 import { CoverGrid } from './CoverGrid'
 import { CoverThumbProps } from './CoverThumb'
@@ -17,7 +16,7 @@ export const MovieSearchPage = (props: MovieSearchPageProperties) => {
   return (
     <>
       <Header { ...props.headerProperties } />
-      <AutoComplete suggestions = { props.suggestions } />
+      <AutoComplete suggestions = { props.suggestions } onInputValueChange={ () => {} }/>
       <CoverGrid coverThumbs={ props.coverThumbs } isLoading={ isLoading } />
     </>
   )

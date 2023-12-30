@@ -5,5 +5,5 @@ export interface HeaderProperties {
   leftMenuEntries: MenuEntryProperties[]
   rightMenuEntries: MenuEntryProperties[]
   rightMenuLabel: string
-  onSelectMenuEntry: () => void
+  onSelectMenuEntry: (selectedEntry: MenuEntryProperties) => void
 }

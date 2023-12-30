@@ -1,8 +1,5 @@
 import { DropdownMenu } from './DropdownMenu'
 import { HeaderProperties } from './HeaderProperties'
-import { MenuEntryProperties } from './MenuEntry'
-
-
 
 export const Header = ({ mainLabel, leftMenuEntries, rightMenuEntries, rightMenuLabel, onSelectMenuEntry } : HeaderProperties ) => {
   return (
