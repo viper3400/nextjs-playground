@@ -14,6 +14,7 @@ interface MoviesFeatureProperties {
 }
 export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
   const [inputValue, setInputValue] = useState('')
+  const [suggestions, setSuggestions] =  useState<string[]>([])
   const menuEntries : MenuEntryProperties[] = [
     {
       label: 'Filmsuche'
@@ -50,15 +51,25 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
   const handleInputChange = async (e: string): Promise<void> => {
     console.log('xx: ' + e)
     setInputValue(e)
-    const result = await getServerInfo()
-    const result2 = await getMovies(e)
-    //console.log(result)
+    //const result = await getServerInfo()
+    try {
+      const result2 = await getMovies(e)
+      console.log(result2)
+      const mapped = result2.value?.map((v) => v.title)
+      if (mapped != undefined) setSuggestions(mapped)
+      result2.value?.forEach( (element) =>
+        console.log(element.title)
+      )
+    } catch (error) {
+      console.log('xxx')
+      signOut()
+    }
   }
 
   return (
     <>
       <Header { ...headerProperties } />
-      <AutoComplete suggestions={ [] } onInputValueChange={ (e) => handleInputChange(e) }/>
+      <AutoComplete suggestions={ suggestions } onInputValueChange={ (e) => handleInputChange(e) }/>
     </>
   )
 }
