@@ -12,32 +12,68 @@ export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteP
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
   const [selectedSuggestion, setSelectedSuggestion] = useState(-1)
+  const [inputChangeTimeout, setInputChangeTimeout] = useState<NodeJS.Timeout | undefined>(undefined)
 
   const handleInputChange = (inputName: string, value: string) => {
     const inputValue = value
     onInputValueChange(inputValue)
     setInputValue(inputValue)
 
-    // Filter suggestions based on the input value
-    const filtered: string[] = suggestions.filter((suggestion: string) =>
-      suggestion.toLowerCase().includes(inputValue.toLowerCase())
-    )
+    // Clear existing timeout
+    if (inputChangeTimeout) {
+      clearTimeout(inputChangeTimeout)
+    }
 
-    if (inputValue == '') setFilteredSuggestions([])
-    else setFilteredSuggestions(filtered)
+    // Check if the input length is greater than 3 before triggering actions
+    if (inputValue.length > 3) {
+      // Set a timeout of 500ms before taking actions
+      setInputChangeTimeout(
+        setTimeout(() => {
+          // Filter suggestions based on the input value
+          const filtered: string[] = suggestions.filter((suggestion: string) =>
+            suggestion.toLowerCase().includes(inputValue.toLowerCase())
+          )
 
-    if (filtered.length > 0) setShowSuggestions(true)
-    else setShowSuggestions(false)
+          if (inputValue === '') setFilteredSuggestions([])
+          else setFilteredSuggestions(filtered)
+
+          if (filtered.length > 0) setShowSuggestions(true)
+          else setShowSuggestions(false)
+        }, 500)
+      )
+    } else {
+      // Clear suggestions and hide suggestions if input length is not greater than 3
+      setFilteredSuggestions([])
+      setShowSuggestions(false)
+    }
   }
-
   const handleSuggestionClick = (suggestion: string) => {
     setInputValue(suggestion)
     setFilteredSuggestions([])
     setShowSuggestions(false)
   }
 
-  const handleKeyDown = (key: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    switch (event.key) {
+    case 'ArrowUp':
+      event.preventDefault()
+      setSelectedSuggestion((prev) => (prev > 0 ? prev - 1 : filteredSuggestions.length - 1))
+      break
+    case 'ArrowDown':
+      event.preventDefault()
+      setSelectedSuggestion((prev) => (prev < filteredSuggestions.length - 1 ? prev + 1 : 0))
+      break
+    case 'Enter':
+      if (selectedSuggestion !== -1) {
+        event.preventDefault()
+        handleSuggestionClick(filteredSuggestions[selectedSuggestion])
+      }
+      break
+    default:
+      break
+    }
   }
+
 
   return (
     <>
