@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 interface TextInputProps {
     inputName: string
     label: string
+    value: string
     password?: boolean
     /**
      * Set the focus on this input when component gets loaded. Be aware that just one
@@ -19,7 +20,6 @@ interface TextInputProps {
      * Will be the label, if empty.
      */
     dataTestAttribute?: string
-    content: string
     onChange: (inputName: string, value: string) => void
     /**
      * Classes that are applied to the outer div of the component
@@ -33,6 +33,7 @@ interface TextInputProps {
 export const TextInput = ({
   inputName,
   label,
+  value,
   password = false,
   dataTestAttribute = label,
   setFocus = false,
@@ -42,12 +43,12 @@ export const TextInput = ({
   onChange
 }: TextInputProps) => {
   const [inputFocused, setInputFocused ] = useState(false)
-  const [inputValue, setInputValue ] = useState('')
+  //const [inputValue, setInputValue ] = useState('')
 
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value)
+    //setInputValue(event.target.value)
     onChange(inputName, event.target.value)
   }
 
@@ -75,7 +76,7 @@ export const TextInput = ({
         <div>
           <input
             type={ password ? 'password' : 'text' }
-            value={ inputValue }
+            value={ value }
             onChange={ handleChange }
             className={ `w-full p-1 border-b-2 outline-none transition duration-700 ${
               invalid ? 'border-rose-600' : 'border-slate-200 focus:border-blue-500'}` }

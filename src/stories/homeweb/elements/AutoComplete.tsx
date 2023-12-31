@@ -46,7 +46,7 @@ export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteP
           inputName='inputValue'
           label='Suchbegriff (Film / Regalstandort)'
           classNames='pt-4 pl-4 pr-4'
-          content={ inputValue }
+          value= { inputValue }
           onChange={ handleInputChange }
           setFocus />
         {showSuggestions && (
