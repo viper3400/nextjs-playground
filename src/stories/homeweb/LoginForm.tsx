@@ -64,7 +64,7 @@ export const LoginForm = ({
             classNames='p-4'
             setFocus
             label={ usernameLabel }
-            content={ formData.username }
+            value={ formData.username }
             onChange={ handleInputChange }
             inputName="username"
             data-test="username-input" />
@@ -72,7 +72,7 @@ export const LoginForm = ({
             classNames='p-4'
             label={ passwordLabel }
             password
-            content={ formData.password }
+            value={ formData.password }
             onChange={ handleInputChange }
             inputName="password"
             data-test="password-input" />

@@ -52,18 +52,24 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
     console.log('xx: ' + e)
     setInputValue(e)
     //const result = await getServerInfo()
-    try {
-      const result2 = await getMovies(e)
-      console.log(result2)
-      const mapped = result2.value?.map((v) => v.title)
-      if (mapped != undefined) setSuggestions(mapped)
-      result2.value?.forEach( (element) =>
-        console.log(element.title)
-      )
-    } catch (error) {
-      console.log('xxx')
-      signOut()
+    //try {
+    const result = await getMovies(e)
+    if (result.responseStatus != 200) {
+      console.log('error response status : ' + result.responseStatus )
+      if (result.responseStatus = 401) signOut()
+      throw new Error(result.responseStatus.toString())
     }
+    console.log(result)
+    const mapped = result.collection.value?.map((v) => v.title)
+    if (mapped != undefined) setSuggestions(mapped)
+    result.collection.value?.forEach( (element) =>
+      console.log(element.title)
+    )
+    //} catch (error: unknown) {
+    // const response = (error as Response)
+    // console.log(response)
+    //signOut()
+    //}
   }
 
   return (

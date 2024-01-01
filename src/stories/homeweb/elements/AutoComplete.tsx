@@ -16,7 +16,6 @@ export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteP
 
   const handleInputChange = (inputName: string, value: string) => {
     const inputValue = value
-    onInputValueChange(inputValue)
     setInputValue(inputValue)
 
     // Clear existing timeout
@@ -29,6 +28,7 @@ export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteP
       // Set a timeout of 500ms before taking actions
       setInputChangeTimeout(
         setTimeout(() => {
+          onInputValueChange(inputValue)
           // Filter suggestions based on the input value
           const filtered: string[] = suggestions.filter((suggestion: string) =>
             suggestion.toLowerCase().includes(inputValue.toLowerCase())
