@@ -5,9 +5,14 @@ import { MenuEntry } from './MenuEntry'
 interface AutoCompleteProperties {
   suggestions: string[]
   onInputValueChange: (value: string) => void
+  triggerChangeEventTimeoutMs: number
+  triggerChangeEventMinInputLength: number
 }
 
-export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteProperties) => {
+export const AutoComplete = (
+  { suggestions, onInputValueChange,
+    triggerChangeEventMinInputLength = 4,
+    triggerChangeEventTimeoutMs = 500 } : AutoCompleteProperties) => {
   const [inputValue, setInputValue] = useState<string>('')
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
@@ -24,7 +29,7 @@ export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteP
     }
 
     // Check if the input length is greater than 3 before triggering actions
-    if (inputValue.length > 3) {
+    if (inputValue.length >= triggerChangeEventMinInputLength) {
       // Set a timeout of 500ms before taking actions
       setInputChangeTimeout(
         setTimeout(() => {
@@ -39,7 +44,7 @@ export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteP
 
           if (filtered.length > 0) setShowSuggestions(true)
           else setShowSuggestions(false)
-        }, 500)
+        }, triggerChangeEventTimeoutMs)
       )
     } else {
       // Clear suggestions and hide suggestions if input length is not greater than 3
@@ -48,7 +53,7 @@ export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteP
     }
   }
   const handleSuggestionClick = (suggestion: string) => {
-    setInputValue(suggestion)
+    handleInputChange('sugg', suggestion)
     setFilteredSuggestions([])
     setShowSuggestions(false)
   }
@@ -67,7 +72,7 @@ export const AutoComplete = ({ suggestions, onInputValueChange } : AutoCompleteP
       if (selectedSuggestion !== -1) {
         event.preventDefault()
         handleSuggestionClick(filteredSuggestions[selectedSuggestion])
-      }
+      } else setShowSuggestions(false)
       break
     default:
       break

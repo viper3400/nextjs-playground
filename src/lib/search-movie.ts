@@ -15,7 +15,7 @@ export async function getMovies (searchValue: string )
   let resultCollection : CollectionWithPagingOfMovieDataResource = {}
   let responseStatus: number
   try {
-    const response = await api.moviedata.movieDataGetMovieData({ Title: searchValue })
+    const response = await api.moviedata.movieDataGetMovieData({ Title: searchValue, UseInlineCoverImage: true })
     console.log('r')
     console.log(response)
     if (response.ok) {
