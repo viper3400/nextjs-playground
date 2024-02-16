@@ -47,7 +47,7 @@
     "@storybook/react": "^7.0.7",
     "@storybook/testing-library": "^0.2.0",
     "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-storybook": "^0.6.11",
+    "eslint-plugin-storybook": "^0.8.0",
     "prisma": "^5.4.1",
     "storybook": "^7.0.7",
     "swagger-typescript-api": "^13.0.3",
