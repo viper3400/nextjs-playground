@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { TextInput } from './TextInput'
-import { MenuEntry } from './MenuEntry'
+import { SelectableList } from './SelectableList'
+import { ListButtonProperties } from './ListButton'
 
 interface AutoCompleteProperties {
   suggestions: string[]
@@ -16,7 +17,6 @@ export const AutoComplete = (
   const [inputValue, setInputValue] = useState<string>('')
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([])
   const [showSuggestions, setShowSuggestions] = useState(false)
-  const [selectedSuggestion, setSelectedSuggestion] = useState(-1)
   const [inputChangeTimeout, setInputChangeTimeout] = useState<NodeJS.Timeout | undefined>(undefined)
 
   const handleInputChange = (inputName: string, value: string) => {
@@ -29,7 +29,7 @@ export const AutoComplete = (
     }
 
     // Check if the input length is greater than 3 before triggering actions
-    if (inputValue.length >= triggerChangeEventMinInputLength) {
+    if (inputValue.length >= triggerChangeEventMinInputLength && inputName!= 'suggestion') {
       // Set a timeout of 500ms before taking actions
       setInputChangeTimeout(
         setTimeout(() => {
@@ -52,37 +52,15 @@ export const AutoComplete = (
       setShowSuggestions(false)
     }
   }
-  const handleSuggestionClick = (suggestion: string) => {
-    handleInputChange('sugg', suggestion)
+  const onListItemClick = (item: ListButtonProperties, index: number) => {
+    handleInputChange('suggestion', item.mainText)
     setFilteredSuggestions([])
     setShowSuggestions(false)
   }
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    switch (event.key) {
-    case 'ArrowUp':
-      event.preventDefault()
-      setSelectedSuggestion((prev) => (prev > 0 ? prev - 1 : filteredSuggestions.length - 1))
-      break
-    case 'ArrowDown':
-      event.preventDefault()
-      setSelectedSuggestion((prev) => (prev < filteredSuggestions.length - 1 ? prev + 1 : 0))
-      break
-    case 'Enter':
-      if (selectedSuggestion !== -1) {
-        event.preventDefault()
-        handleSuggestionClick(filteredSuggestions[selectedSuggestion])
-      } else setShowSuggestions(false)
-      break
-    default:
-      break
-    }
-  }
-
-
   return (
     <>
-      <div className="autocomplete" onKeyDown={ handleKeyDown }>
+      <div className="autocomplete">
         < TextInput
           inputName='inputValue'
           label='Suchbegriff (Film / Regalstandort)'
@@ -91,18 +69,15 @@ export const AutoComplete = (
           onChange={ handleInputChange }
           setFocus />
         {showSuggestions && (
-          <ul className="w-full pl-4 pr-4 absolute z-10">
-            {filteredSuggestions.map((suggestion, index) => (
-              <li
-                className={ `${
-                  selectedSuggestion === index ? 'bg-slate-300' : 'bg-slate-100'
-                } hover:bg-slate-200` }
-                key={ index }
-                onClick={ () => handleSuggestionClick(suggestion) }
-              ><MenuEntry label={ suggestion } />
-              </li>
-            ))}
-          </ul>
+          <div className="w-full pl-4 pr-4 absolute z-10">
+            <SelectableList
+              listItems={
+                filteredSuggestions.map(mainText => ({
+                  mainText
+                })) }
+              onItemClick={ onListItemClick }
+            />
+          </div>
         )}
       </div>
     </>
