@@ -63,5 +63,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm ci
-      - name: Componentn test
+      - name: Install playwright
+        run: npx playwright install-deps
+      - name: Component test
         run: npm run test:ct
