@@ -6,8 +6,8 @@ import { ListButtonProperties } from './ListButton'
 interface AutoCompleteProperties {
   suggestions: string[]
   onInputValueChange: (value: string) => void
-  triggerChangeEventTimeoutMs: number
-  triggerChangeEventMinInputLength: number
+  triggerChangeEventTimeoutMs?: number
+  triggerChangeEventMinInputLength?: number
 }
 
 export const AutoComplete = (
