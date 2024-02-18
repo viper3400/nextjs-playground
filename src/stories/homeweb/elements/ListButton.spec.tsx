@@ -5,6 +5,7 @@ import { By, Click, CssClasses, Hover, PageElement, PageElements, Text, isVisibl
 import React from 'react'
 
 import { Duration, Log, Wait } from '@serenity-js/core'
+import { ListButtonSerenityHelper } from './ListButtonSerenityHelper'
 import { ListButton as ListButtonComponent } from './ListButton'
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -12,7 +13,6 @@ const { it, describe } = useBase(componentTest)
 
 describe('ListButton', () => {
 
-  const listButton = PageElement.located(By.css('[data-test="list-button"]').describedAs('list button'))
   const buttonText = 'Famous button'
   const primaryBackgroundColorClassName = 'bg-slate-100'
   const secondaryBackgroundColorClassName = 'bg-slate-200'
@@ -24,7 +24,7 @@ describe('ListButton', () => {
     )).describedAs('default list button')
 
     await actor.attemptsTo(
-      Ensure.eventually(Text.of(listButton), equals(buttonText))
+      Ensure.eventually(Text.of(ListButtonSerenityHelper.listButton), equals(buttonText))
     )
   })
 
@@ -35,12 +35,10 @@ describe('ListButton', () => {
     )).describedAs('default list button')
 
     await actor.attemptsTo(
-      Ensure.that(listButton, isVisible()),
-      Ensure.that(CssClasses.of(listButton), contain(primaryBackgroundColorClassName)),
-      Ensure.that(CssClasses.of(listButton), not(contain(secondaryBackgroundColorClassName))),
-      Hover.over(listButton),
-      Wait.until(CssClasses.of(listButton), contain(secondaryBackgroundColorClassName)),
-      Ensure.that(CssClasses.of(listButton), not(contain(primaryBackgroundColorClassName)))
+      Ensure.that(ListButtonSerenityHelper.listButton, isVisible()),
+      ListButtonSerenityHelper.EnsurePrimaryBackgroundColor(),
+      Hover.over(ListButtonSerenityHelper.listButton),
+      ListButtonSerenityHelper.EnsureSecondaryBackgroundColor()
     )
   })
 
@@ -51,9 +49,8 @@ describe('ListButton', () => {
     )).describedAs('selected list button')
 
     await actor.attemptsTo(
-      Ensure.that(listButton, isVisible()),
-      Wait.until(CssClasses.of(listButton), contain(secondaryBackgroundColorClassName)),
-      Ensure.that(CssClasses.of(listButton), not(contain(primaryBackgroundColorClassName)))
+      Ensure.that(ListButtonSerenityHelper.listButton, isVisible()),
+      ListButtonSerenityHelper.EnsureSecondaryBackgroundColor()
     )
   })
 

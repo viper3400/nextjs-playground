@@ -52,7 +52,7 @@ export const SelectableList = ({ listItems, onItemClick }: SelectableListPropert
 
   return (
     <>
-      <div>{items}</div>
+      <div data-test="selectable-list">{items}</div>
     </>
   )
 }
