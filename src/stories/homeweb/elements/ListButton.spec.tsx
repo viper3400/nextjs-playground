@@ -5,6 +5,7 @@ import { By, Click, CssClasses, Hover, PageElement, PageElements, Text, isVisibl
 import React from 'react'
 
 import { Duration, Log, Wait } from '@serenity-js/core'
+import { ListButtonSerenityHelper } from './ListButtonSerenityHelper'
 import { ListButton as ListButtonComponent } from './ListButton'
 
 // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -12,34 +13,44 @@ const { it, describe } = useBase(componentTest)
 
 describe('ListButton', () => {
 
-  const listButton = PageElement.located(By.css('button').describedAs('list button'))
   const buttonText = 'Famous button'
+  const primaryBackgroundColorClassName = 'bg-slate-100'
+  const secondaryBackgroundColorClassName = 'bg-slate-200'
 
   it('shows the text of the list button', async ({ mount, actor }) => {
 
-    const listButtonComponent = PageElement.from(await mount(
+    PageElement.from(await mount(
       <ListButtonComponent mainText={ buttonText } />
-    )).describedAs('list button')
+    )).describedAs('default list button')
 
     await actor.attemptsTo(
-      Ensure.eventually(Text.of(listButton), equals(buttonText))
+      Ensure.eventually(Text.of(ListButtonSerenityHelper.listButton), equals(buttonText))
     )
   })
 
   it('changes background color on hover', async ({ mount, actor }) => {
 
-    const listButtonComponent = PageElement.from(await mount(
+    PageElement.from(await mount(
       <ListButtonComponent mainText={ buttonText } />
-    )).describedAs('list button')
+    )).describedAs('default list button')
 
     await actor.attemptsTo(
-      Ensure.that(listButton, isVisible()),
-      Ensure.that(CssClasses.of(listButton), contain('bg-slate-100')),
-      Ensure.that(CssClasses.of(listButton), not(contain('bg-slate-200'))),
-      Wait.for(Duration.ofMilliseconds(500)),
-      Hover.over(listButton),
-      Wait.until(CssClasses.of(listButton), contain('bg-slate-200')),
-      Ensure.that(CssClasses.of(listButton), not(contain('bg-slate-100')))
+      Ensure.that(ListButtonSerenityHelper.listButton, isVisible()),
+      ListButtonSerenityHelper.EnsurePrimaryBackgroundColor(),
+      Hover.over(ListButtonSerenityHelper.listButton),
+      ListButtonSerenityHelper.EnsureSecondaryBackgroundColor()
+    )
+  })
+
+  it('changes background color when selected', async ({ mount, actor }) => {
+
+    PageElement.from(await mount(
+      <ListButtonComponent mainText={ buttonText } selected />
+    )).describedAs('selected list button')
+
+    await actor.attemptsTo(
+      Ensure.that(ListButtonSerenityHelper.listButton, isVisible()),
+      ListButtonSerenityHelper.EnsureSecondaryBackgroundColor()
     )
   })
 

@@ -25,7 +25,8 @@ export const ListButton = ({ mainText, selected = false, onClick }: ListButtonPr
         className={ buttonClassName }
         onClick={ onClick }
         onMouseEnter={ onMouseEnter }
-        onMouseLeave={ onMouseLeave }>
+        onMouseLeave={ onMouseLeave }
+        data-test="list-button">
         {mainText}
       </button>
     </>
