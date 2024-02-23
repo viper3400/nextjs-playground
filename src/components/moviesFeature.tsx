@@ -107,7 +107,7 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
   return (
     <>
       <Header { ...headerProperties } />
-      <AutoComplete suggestions={ suggestions } onInputValueChange={ (e) => handleInputChange(e) } triggerChangeEventTimeoutMs={ 500 } triggerChangeEventMinInputLength={ 4 }/>
+      <AutoComplete suggestions={ suggestions } onInputValueChange={ (e) => handleInputChange(e) } triggerChangeEventTimeoutMs={ 500 } triggerChangeEventMinInputLength={ 3 }/>
       <CoverGrid
         coverThumbs={ gridMovies }
         isLoading= { false }></CoverGrid>
