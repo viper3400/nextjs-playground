@@ -3,10 +3,13 @@ import path from "path";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-interactions", {
-    name: '@storybook/addon-styling',
-    options: {}
-  }],
+  addons: [
+    "@storybook/addon-links",
+    "@storybook/addon-essentials",
+    "@storybook/addon-interactions",
+    "@storybook/addon-themes",
+    "@storybook/addon-styling-webpack"
+  ],
   core: {
     disableTelemetry: true,
   },
