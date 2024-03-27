@@ -513,8 +513,9 @@ export class HttpClient<SecurityDataType = unknown> {
 
   public abortRequest = (cancelToken: CancelToken) => {
     const abortController = this.abortControllers.get(cancelToken);
-
+    console.log('x')
     if (abortController) {
+      console.warn('aborted');
       abortController.abort();
       this.abortControllers.delete(cancelToken);
     }
@@ -536,10 +537,7 @@ export class HttpClient<SecurityDataType = unknown> {
         this.securityWorker &&
         (await this.securityWorker(this.securityData))) ||
       {};
-    console.log('secureParams')
-    console.log(secureParams)
     const requestParams = this.mergeRequestParams(params, secureParams);
-    console.log(requestParams)
     const queryString = query && this.toQueryString(query);
     const payloadFormatter = this.contentFormatters[type || ContentType.Json];
     const responseFormat = format || requestParams.format;

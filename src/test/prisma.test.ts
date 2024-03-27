@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient } from '@internal/prisma/client'
 
 describe('prisma db client', () => {
   test('create & delete db entry in HomeWebSession table', async () => {

@@ -1,0 +1,20 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:./test.db"
+}
+
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../node_modules/@internal/prisma/client"
+}
+
+
+model HomeWebSession {
+   id            String    @id @default(cuid())
+   username      String
+   token         String
+   refresh1      String
+   refresh2      String
+
+   @@unique([username])
+}
