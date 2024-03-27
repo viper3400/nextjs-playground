@@ -38,7 +38,7 @@
   "devDependencies": {
     "@types/jest": "^29.5.12",
     "@types/node": "20.11.30",
-    "@types/react": "18.2.69",
+    "@types/react": "18.2.72",
     "@types/react-dom": "18.2.22",
     "autoprefixer": "10.4.19",
     "postcss": "8.4.38",
@@ -74,6 +74,6 @@
     "ts-jest": "^29.1.2"
   },
   "volta": {
-    "node": "20.11.1"
+    "node": "20.12.0"
   }
 }
