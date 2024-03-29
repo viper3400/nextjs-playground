@@ -1,12 +1,12 @@
 {
     "$schema": "https://typedoc.org/schema.json",
-    "tsconfig": "tsconfig.json",
+    "tsconfig": "tsconfig.typedoc.json",
     "entryPoints": [
         "./src/lib/*"
     ],
     "out": "typedoc-out",
     "plugin": ["typedoc-plugin-missing-exports"],
     "compilerOptions": {
-        "exclude": ["./src/stories"]
+        "exclude": ["./src/stories", "./src/test"]
     }
 }
