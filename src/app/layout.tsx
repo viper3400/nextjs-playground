@@ -1,6 +1,4 @@
-import AuthenticationProvider from '@/auth-provider'
 import './globals.css'
-import SessionWrapper from '@/session-wrapper'
 import { customConfig } from '../../custom-config'
 
 

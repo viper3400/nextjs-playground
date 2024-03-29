@@ -1,8 +1,6 @@
 'use client'
 
 import { signIn, signOut, useSession } from 'next-auth/react'
-import { Dog } from '@/components/dog'
-import { LoginForm } from '@/stories/homeweb/LoginForm'
 import { JaxxButton } from './jaxx-button'
 
 export default function Github() {

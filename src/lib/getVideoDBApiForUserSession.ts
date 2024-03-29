@@ -2,21 +2,26 @@
 
 import { auth } from '@/auth'
 import { customConfig } from '../../custom-config'
-import { apiBearerHeader } from './api-bearer-header'
 import prisma from './db-session-handling/prisma'
-import { Api } from './videodb-api'
+import { getAuthenticatedApi } from './getAuthenticatedApi'
 
-/**
- * The `getVideoDBApiForUserSession` function retrieves a VideoDB API instance
- * for the current user session, using authentication and session information.
- *
- * @throws Will throw an error if the user session is not available or if the
- * VideoDB session is not found.
- *
- * @returns {Promise<Api<unknown>>} A promise that resolves to an authenticated instance
- * of the VideoDB API.
- */
-export async function getVideoDBApiForUserSession(): Promise<Api<unknown>> {
+
+export async function getVideoDBApiForUserSession() {
+  const apiBaseUrl = customConfig.apiBaseUrl ? customConfig.apiBaseUrl : 'Error: Base Url not set'
+  const session = await getDbUserSession()
+  const api = getAuthenticatedApi(session.videodbSession.token, apiBaseUrl)
+  return api
+}
+async function getDbUserSession()
+: Promise<{
+  videodbSession: {
+    id: string,
+    username: string,
+    token: string,
+    refresh1: string,
+    refresh2: string
+  }
+}>{
   // Retrieve the user session information using authentication.
   const session = await auth()
 
@@ -33,15 +38,8 @@ export async function getVideoDBApiForUserSession(): Promise<Api<unknown>> {
   // Throw an error if the VideoDB session is not found.
   if (!videodbSession) throw new Error('no videodb session')
 
+  return  { videodbSession }
   // Create a new authenticated API instance with the VideoDB session token.
-  const authApi = new Api(apiBearerHeader(videodbSession.token))
-
-  // Set the base URL for the API, using custom configuration or a default error message.
-  authApi.baseUrl = customConfig.apiBaseUrl ? customConfig.apiBaseUrl : 'error: base url not set'
-
-  // Set security data for the API instance.
-  authApi.setSecurityData({ token: videodbSession.token })
-
-  // Return the authenticated VideoDB API instance.
-  return authApi
+  //return getAuthenticatedApi(videodbSession)
 }
+
