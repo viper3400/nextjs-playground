@@ -2,15 +2,16 @@
 
 import { signOut } from 'next-auth/react'
 import { Session } from 'next-auth'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { MenuEntryProperties } from '@/stories/homeweb/elements/MenuEntry'
 import { Header } from '@/stories/homeweb/elements/Header'
 import { AutoComplete } from '@/stories/homeweb/elements/AutoComplete'
 import { getMovies } from '@/lib/search-movie'
 import { getServerInfo } from '@/lib/server-info'
 import { CoverGrid } from '@/stories/homeweb/CoverGrid'
-import { MovieDataResource } from '@/lib/videodb-api'
+import { CollectionWithPagingOfMovieDataResource, MovieDataResource } from '@/lib/videodb-api'
 import { CoverThumb, CoverThumbProps } from '@/stories/homeweb/CoverThumb'
+import { fetchMovies } from '@/app/fetchMovies'
 import picard from '../stories/homeweb/assets/picard.jpg'
 
 interface MoviesFeatureProperties {
@@ -20,6 +21,8 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
   const [inputValue, setInputValue] = useState('')
   const [suggestions, setSuggestions] =  useState<string[]>([])
   const [gridMovies, setGridMovies] = useState<CoverThumbProps[]>([])
+  const [isFetching, setIsFetching] = useState(false)
+  const abortControllerRef = useRef<AbortController | null>(null)
   const menuEntries : MenuEntryProperties[] = [
     {
       label: 'Filmsuche'
@@ -53,52 +56,71 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
     }
   }
 
+  const movies = async (search: string, signal: AbortSignal ) : Promise<any> => {
+    let json: any
+    try {
+      const response = await fetch(`api/moviedata/?query=${search}`, { signal })
+      console.log('singal aborted -> ' + signal.aborted)
+      console.log(response)
+      json = await response.json()
+    } catch (error: any) {
+      if (error.name === 'AbortError') {
+        console.info('Fetch aborted')
+      } else console.error(error.message)
+      json = undefined
+    }  { return json }
+  }
+
   useEffect(() => {
     // This effect updates suggestions when inputValue changes
-    const fetchSuggestions = async () => {
-      const result = await getMovies(inputValue)
-      if (result.responseStatus === 401) {
-        console.error('401 --')
-        signOut()
+    if (abortControllerRef.current) {
+      const c = abortControllerRef.current
+      try {
+        console.log('signal ' + c.signal.aborted)
+        c.abort()
+      } catch (error: any) {
+        if (error.name === 'AbortError') {
+          console.log('Fetch aborted')
+        } else {
+          console.error('Fetch error:', error)
+        }
+        console.error(error)
       }
-      if (result.collection.value) {
-        const mapped = result.collection.value.map((v) => v.title)
-        setSuggestions(mapped || [])
+      abortControllerRef.current = null
+    }
+    const controller = new AbortController()
+    abortControllerRef.current = controller
+    const signal = controller.signal
+    if (inputValue != '') {
+      console.log('searching ...')
+      try {
+        movies(inputValue, signal).then(result => {
+          if (result) {
+            console.log(result)
+            console.log('frontend')
+            console.log(result)
+            if (result === 'Unauthorized') signOut()
+            if (result.value) {
+              const mapped = result.value.map((v: any) => v.title)
+              setSuggestions(mapped || [])
+            }
+          }
+        })
+      } catch (error: any) {
+        if (error.name === 'AbortError') {
+          console.log('Fetch aborted')
+        } else {
+          console.error('Fetch error:', error)
+        }
       }
+
     }
 
-    fetchSuggestions()
-    console.log(inputValue)
-
+    return () => {
+      controller.abort()
+    }
   }, [inputValue])
 
-  /* useEffect(() => {
-    // This effect updates gridMovies when search results are available
-    const fetchMovies = async () => {
-      const result = await getMovies(inputValue)
-      if (result.collection.value) {
-        const gridCovers = result.collection?.value?.map((value) => {
-          // Adjust the following logic based on your CoverThumbProps requirements
-          const currentCover: CoverThumbProps = {
-            imageSource: picard,
-            altText: value.title || 'Unknown Title',
-            bottomLabel: value.diskid || '',
-            isFavorite: value.isFavorite || false,
-            isSeen: value.lastSeenInformation ? true : false,
-            timesSeen: '0',
-            isFlagged: value.isFlagged || false,
-            isTvSeries: value.istv || false,
-            hasDigitalCopy: value.filename ? true : false,
-          }
-          return currentCover          })
-        setGridMovies(gridCovers)
-      }
-    }
-
-    if (inputValue.length >= 4) {
-      fetchMovies()
-    }
-  }, [inputValue])*/
 
   const handleInputChange = (e: string): void => {
     setInputValue(e)
@@ -107,7 +129,7 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
   return (
     <>
       <Header { ...headerProperties } />
-      <AutoComplete suggestions={ suggestions } onInputValueChange={ (e) => handleInputChange(e) } triggerChangeEventTimeoutMs={ 500 } triggerChangeEventMinInputLength={ 3 }/>
+      <AutoComplete suggestions={ suggestions } onInputValueChange={ (e) => handleInputChange(e) } triggerChangeEventTimeoutMs={ 0 } triggerChangeEventMinInputLength={ 0 }/>
       <CoverGrid
         coverThumbs={ gridMovies }
         isLoading= { false }></CoverGrid>
