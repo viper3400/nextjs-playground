@@ -39,7 +39,5 @@ async function getDbUserSession()
   if (!videodbSession) throw new Error('no videodb session')
 
   return  { videodbSession }
-  // Create a new authenticated API instance with the VideoDB session token.
-  //return getAuthenticatedApi(videodbSession)
 }
 

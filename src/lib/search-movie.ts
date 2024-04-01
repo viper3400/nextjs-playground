@@ -1,21 +1,22 @@
 'use server'
 
-import { getVideoDBApiForUserSession } from './getVideoDBApiForUserSession'
-import { CollectionWithPagingOfMovieDataResource, MovieDataResource } from './videodb-api'
+import { customConfig } from '../../custom-config'
+import { CollectionWithPagingOfMovieDataResource } from './videodb-api'
 
 interface GetMoviesResult {
   collection: CollectionWithPagingOfMovieDataResource
   responseStatus: number
 }
 
-export async function getMovies (searchValue: string )
+export async function getMovies (searchValue: string)
         : Promise<GetMoviesResult> {
   console.log('getMovies - search for ' + searchValue)
-  const api = await getVideoDBApiForUserSession()
+  const api = await customConfig.authenticatedApi()
   let resultCollection : CollectionWithPagingOfMovieDataResource = {}
   let responseStatus: number
   try {
-    const response = await api.moviedata.movieDataGetMovieData({ Title: searchValue, UseInlineCoverImage: true })
+    const response = await api.moviedata.movieDataGetMovieData(
+      { Title: searchValue, UseInlineCoverImage: true })
     console.log('r')
     console.log(response)
     if (response.ok) {

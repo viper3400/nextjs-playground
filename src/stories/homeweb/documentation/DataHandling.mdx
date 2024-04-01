@@ -1,0 +1,20 @@
+import { Meta, tab } from '@storybook/blocks'
+import { Mermaid } from 'mdx-mermaid/Mermaid'
+import Table from './../Table';
+
+<Meta title="HomeWeb/Documentation/DataHandling" />
+# DataHandling
+<Mermaid chart={`classDiagram
+class Movie {
+    +string title
+}
+
+class MoviePageCollection {
+    +string         searchIdentifier
+    +List~Movie~    movieCollection
+}
+
+class MoviePageCollections {
+    +List~MoviePageCollections~ collection
+}
+`} />
