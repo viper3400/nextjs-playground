@@ -58,7 +58,7 @@
     "@storybook/react": "^8.0.5",
     "@storybook/testing-library": "^0.2.2",
     "@types/jest": "^29.5.12",
-    "@types/node": "20.12.2",
+    "@types/node": "20.12.7",
     "@types/react": "18.2.73",
     "@types/react-dom": "18.2.23",
     "autoprefixer": "10.4.19",
@@ -78,7 +78,7 @@
     "typedoc-plugin-missing-exports": "^2.2.0"
   },
   "volta": {
-    "node": "20.12.0"
+    "node": "20.12.2"
   },
   "msw": {
     "workerDirectory": "public"
