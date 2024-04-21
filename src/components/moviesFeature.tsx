@@ -59,6 +59,7 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
   const movies = async (search: string, signal: AbortSignal ) : Promise<any> => {
     let json: any
     try {
+      setIsFetching(true)
       const response = await fetch(`api/moviedata/?query=${search}`, { signal })
       console.log('singal aborted -> ' + signal.aborted)
       console.log(response)
@@ -68,7 +69,9 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
         console.info('Fetch aborted')
       } else console.error(error.message)
       json = undefined
-    }  { return json }
+    }
+    setIsFetching(false)
+    return json
   }
 
   useEffect(() => {
@@ -115,7 +118,6 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
       }
 
     }
-
     return () => {
       controller.abort()
     }
@@ -129,7 +131,12 @@ export const MoviesFeature = ({ session }: MoviesFeatureProperties) => {
   return (
     <>
       <Header { ...headerProperties } />
-      <AutoComplete suggestions={ suggestions } onInputValueChange={ (e) => handleInputChange(e) } triggerChangeEventTimeoutMs={ 0 } triggerChangeEventMinInputLength={ 0 }/>
+      <AutoComplete
+        suggestions={ suggestions }
+        onInputValueChange={ (e) => handleInputChange(e) }
+        isLoading = { isFetching }
+        triggerChangeEventTimeoutMs={ 300 }
+        triggerChangeEventMinInputLength={ 3 }/>
       <CoverGrid
         coverThumbs={ gridMovies }
         isLoading= { false }></CoverGrid>

@@ -16,7 +16,7 @@ export const MovieSearchPage = (props: MovieSearchPageProperties) => {
   return (
     <>
       <Header { ...props.headerProperties } />
-      <AutoComplete suggestions = { props.suggestions } onInputValueChange={ () => {} }/>
+      <AutoComplete isLoading={ false } suggestions = { props.suggestions } onInputValueChange={ () => {} }/>
       <CoverGrid coverThumbs={ props.coverThumbs } isLoading={ isLoading } />
     </>
   )
