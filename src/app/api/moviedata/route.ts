@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
   try {
     console.log('fetchMovies - fetching ...' + query)
     const response = await api.moviedata.movieDataGetMovieData(
-      { Title: query, UseInlineCoverImage: true },
+      { Title: query, UseInlineCoverImage: false, Limit: 11 },
       { signal: signal })
     console.log('signal aborted: ' + signal.aborted)
     console.log('fetchMovies - fetched ' + query)

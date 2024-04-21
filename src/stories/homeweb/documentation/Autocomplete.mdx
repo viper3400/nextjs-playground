@@ -1,0 +1,43 @@
+import { Meta, tab } from '@storybook/blocks'
+import { Mermaid } from 'mdx-mermaid/Mermaid'
+import Table from './../Table';
+
+<Meta title="HomeWeb/Documentation/Autocomplete" />
+# Movie Search with Preview Search
+
+## Happy Path
+<Mermaid chart={`sequenceDiagram
+actor User
+participant InputField
+participant Suggestions
+participant Api
+
+
+User ->> InputField: enter char 'S'
+activate User
+activate InputField
+InputField ->> InputField: inputValue.count() < 3
+User ->> InputField: enter char 't'
+InputField ->> InputField: inputValue.count() < 3
+InputField ->> InputField: inputValue.count() >= 3
+User ->> InputField: enter char 'a'
+InputField ->> Api: query="Sta"
+deactivate User
+deactivate InputField
+activate Api
+Api ->> Suggestions: Suggestions for "Sta"
+activate Suggestions
+deactivate Api
+Suggestions ->> Suggestions: Show suggestions for "Sta"
+activate User
+User ->> Suggestions: select value
+deactivate User
+create participant SelectedValue
+Suggestions ->> SelectedValue: set value
+deactivate Suggestions
+
+
+
+
+
+`} />
