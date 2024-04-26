@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Session } from 'next-auth'
-import { rest } from 'msw'
+import { http } from 'msw'
 import { MoviesFeature } from '@/components/moviesFeature'
 import * as movies from '../../../mocks/movies.json'
 
@@ -29,8 +29,12 @@ export const Text: Story = {
   },
   parameters: {
     msw: [
-      rest.get('api/moviedata', (_req, res, ctx) => {
-        return res(ctx.json(movies))
+      http.get('api/moviedata', () => {
+        return new Response(JSON.stringify(movies), {
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
       }),
     ],
     nextjs: {
