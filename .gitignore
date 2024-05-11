@@ -49,3 +49,5 @@ next-env.d.ts
 /target/
 /playwright-report/
 /playwright/.cache
+
+.last-run.json
