@@ -40,7 +40,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "@mswjs/data": "^0.16.1",
-    "@playwright/experimental-ct-react": "^1.44.1",
+    "@playwright/experimental-ct-react": "^1.45.1",
     "@serenity-js/assertions": "^3.23.2",
     "@serenity-js/console-reporter": "^3.23.2",
     "@serenity-js/core": "^3.23.2",
