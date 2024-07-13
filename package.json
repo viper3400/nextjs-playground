@@ -69,7 +69,7 @@
     "msw-storybook-addon": "^2.0.0",
     "npm-failsafe": "^1.2.0",
     "postcss": "8.4.39",
-    "rimraf": "^5.0.5",
+    "rimraf": "^6.0.0",
     "storybook": "^8.0.5",
     "swagger-typescript-api": "^13.0.3",
     "ts-jest": "^29.1.2",
