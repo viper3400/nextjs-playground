@@ -38,7 +38,7 @@
     "typescript": "5.5.4"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.1",
+    "@faker-js/faker": "^9.0.0",
     "@mswjs/data": "^0.16.1",
     "@playwright/experimental-ct-react": "^1.45.3",
     "@serenity-js/assertions": "^3.25.2",
