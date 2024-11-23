@@ -1,5 +1,5 @@
 # Use the Playwright image as the base
-FROM mcr.microsoft.com/playwright:v1.48.2-noble
+FROM mcr.microsoft.com/playwright:v1.49.0-noble
 
 # Install OpenJDK (Java) and necessary tools
 RUN apt-get update && \
